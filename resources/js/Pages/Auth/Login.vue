@@ -13,7 +13,7 @@ defineProps({
 })
 
 const form = useForm({
-  username: '',
+  email: '',
   password: '',
   remember: false,
 })
@@ -35,21 +35,21 @@ const submit = () => {
 
     <form @submit.prevent="submit">
       <div>
-        <InputLabel for="username" value="Username" />
+        <InputLabel for="email" value="아이디 or Email" />
         <TextInput
-          id="username"
+          id="email"
           type="text"
           class="mt-1 block w-full"
-          v-model="form.username"
+          v-model="form.email"
           required
           autofocus
-          autocomplete="username"
+          autocomplete="email"
         />
-        <InputError class="mt-2" :message="form.errors.username" />
+        <InputError class="mt-2" :message="form.errors.email" />
       </div>
 
       <div class="mt-4">
-        <InputLabel for="password" value="Password" />
+        <InputLabel for="password" value="비밀번호" />
         <TextInput
           id="password"
           type="password"
@@ -64,7 +64,7 @@ const submit = () => {
       <div class="mt-4 block">
         <label class="flex items-center">
           <Checkbox name="remember" v-model:checked="form.remember" />
-          <span class="ml-2 text-sm text-gray-600">Remember me</span>
+          <span class="ml-2 text-sm text-gray-600">로그인 상태 유지</span>
         </label>
       </div>
 
@@ -74,7 +74,7 @@ const submit = () => {
           :href="route('password.request')"
           class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
         >
-          Forgot your password?
+          비밀번호를 잊으셨나요?
         </Link>
 
         <PrimaryButton
@@ -82,7 +82,7 @@ const submit = () => {
           :class="{ 'opacity-25': form.processing }"
           :disabled="form.processing"
         >
-          Log in
+          로그인
         </PrimaryButton>
       </div>
     </form>
