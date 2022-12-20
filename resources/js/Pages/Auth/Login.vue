@@ -35,7 +35,7 @@ const submit = () => {
 
     <form @submit.prevent="submit">
       <div>
-        <InputLabel for="email" value="아이디 or Email" />
+        <InputLabel for="email" :value="__('username or email')" />
         <TextInput
           id="email"
           type="text"
@@ -49,7 +49,7 @@ const submit = () => {
       </div>
 
       <div class="mt-4">
-        <InputLabel for="password" value="비밀번호" />
+        <InputLabel for="password" :value="__('Password')" />
         <TextInput
           id="password"
           type="password"
@@ -64,7 +64,9 @@ const submit = () => {
       <div class="mt-4 block">
         <label class="flex items-center">
           <Checkbox name="remember" v-model:checked="form.remember" />
-          <span class="ml-2 text-sm text-gray-600">로그인 상태 유지</span>
+          <span class="ml-2 text-sm text-gray-600">
+            {{ __('Remember me') }}
+          </span>
         </label>
       </div>
 
@@ -74,7 +76,7 @@ const submit = () => {
           :href="route('password.request')"
           class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
         >
-          비밀번호를 잊으셨나요?
+          {{ __('Forgot your password?') }}
         </Link>
 
         <PrimaryButton
@@ -82,7 +84,7 @@ const submit = () => {
           :class="{ 'opacity-25': form.processing }"
           :disabled="form.processing"
         >
-          로그인
+          {{ __('Log in') }}
         </PrimaryButton>
       </div>
     </form>
