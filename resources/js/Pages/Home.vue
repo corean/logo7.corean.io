@@ -1,7 +1,8 @@
 <script setup>
-import { Head } from '@inertiajs/inertia-vue3'
 import Layout from '@/Layouts/Layout.vue'
+import { Head } from '@inertiajs/inertia-vue3'
 </script>
+
 <template>
   <Head title="home" />
 
