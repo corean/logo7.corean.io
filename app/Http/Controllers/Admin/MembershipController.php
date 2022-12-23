@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\MembershipResource;
 use App\Models\Membership;
 use Inertia\Inertia;
 
@@ -15,6 +16,6 @@ class MembershipController extends Controller
             ->with('member')
             ->paginate(10);
 
-        return Inertia::render('Admin/Memberships/Index', ['memberships' => $memberships]);
+        return Inertia::render('Admin/Memberships/Index', ['memberships' => MembershipResource::collection($memberships)]);
     }
 }
