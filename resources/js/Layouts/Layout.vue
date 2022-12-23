@@ -3,19 +3,21 @@ import { ref } from 'vue'
 import ApplicationLogo from '@/Components/ApplicationLogo.vue'
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue'
 import { Link } from '@inertiajs/inertia-vue3'
-import UserMenu from '@/Pages/Auth/Partials/UserMenu.vue'
-import NavMenu from '@/Pages/Auth/Partials/NavMenu.vue'
+import UserMenu from '@/Layouts/Partials/UserMenu.vue'
+import NavMenu from '@/Layouts/Partials/NavMenu.vue'
 
 const showingNavigationDropdown = ref(false)
 </script>
 
 <template>
   <div>
-    <div class="min-h-screen bg-gray-100">
+    <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
       <nav class="border-b border-gray-100 bg-white">
         <!-- Primary Navigation Menu -->
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div class="flex h-16 justify-between">
+        <div
+          class="mx-auto max-w-7xl border-b border-gray-200 px-4 sm:px-6 lg:px-8"
+        >
+          <div class="flex h-14 justify-between">
             <div class="flex">
               <!-- Logo -->
               <div class="flex shrink-0 items-center">
@@ -25,9 +27,6 @@ const showingNavigationDropdown = ref(false)
                   />
                 </Link>
               </div>
-
-              <!-- Navigation Links -->
-              <NavMenu />
             </div>
 
             <UserMenu />
@@ -67,6 +66,12 @@ const showingNavigationDropdown = ref(false)
                 </svg>
               </button>
             </div>
+          </div>
+        </div>
+        <!-- Navigation Links -->
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="flex h-14 justify-between">
+            <NavMenu />
           </div>
         </div>
 
