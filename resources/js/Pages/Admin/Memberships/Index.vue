@@ -1,5 +1,5 @@
 <script setup>
-import Layout from '@/Layouts/Layout.vue'
+import Layout from '@/Layouts/Default/Layout.vue'
 import { Head } from '@inertiajs/inertia-vue3'
 import Pagination from '@/Components/Pagination.vue'
 

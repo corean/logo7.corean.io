@@ -26,8 +26,12 @@ Route::get('/', function () {
     ]);
 });
 Route::get('/test', function () {
+    sleep(2);
     return Inertia::render('Test');
 })->name('test');
+Route::get('/default-layout', function () {
+    return Inertia::render('DefaultLayout');
+})->name('default-layout');
 
 Route::get('/home', function () {
     return Inertia::render('Home');

@@ -1,6 +1,9 @@
+@import "variables";
 
 // Tabler
-
 $assets-base: "../../../dist" !default;
-
 @import '@tabler/core/src/scss/tabler';
+
+#app {
+    height: 100vh;
+}

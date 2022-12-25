@@ -1,6 +1,6 @@
+import '../css/app.css' // tailwindcss
 import '@tabler/core/src/js/tabler.js'
 import './bootstrap'
-import '../css/app.css'
 
 import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/inertia-vue3'
@@ -14,6 +14,7 @@ const appName =
 
 createInertiaApp({
   title: (title) => `${title} - ${appName}`,
+  class: 'page',
   resolve: (name) =>
     resolvePageComponent(
       `./Pages/${name}.vue`,

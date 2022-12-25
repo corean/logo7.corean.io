@@ -3,7 +3,7 @@ import DeleteUserForm from './Partials/DeleteUserForm.vue'
 import UpdatePasswordForm from './Partials/UpdatePasswordForm.vue'
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm.vue'
 import { Head } from '@inertiajs/inertia-vue3'
-import Layout from '@/Layouts/Layout.vue'
+import Layout from '@/Layouts/Default/Layout.vue'
 
 defineProps({
   mustVerifyEmail: Boolean,

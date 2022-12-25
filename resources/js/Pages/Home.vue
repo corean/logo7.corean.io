@@ -1,5 +1,5 @@
 <script setup>
-import Layout from '@/Layouts/Layout.vue'
+import Layout from '@/Layouts/Tabler/Layout.vue'
 import { Head } from '@inertiajs/inertia-vue3'
 </script>
 
@@ -7,12 +7,14 @@ import { Head } from '@inertiajs/inertia-vue3'
   <Head title="home" />
 
   <Layout>
-    <div class="py-12">
-      <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
-          <div class="p-6 text-gray-900">
-            Welcome to your Inertia app! <br />
-            한글 글꼴 테스트
+    <div class="page-body">
+      <div class="container-xl">
+        <div class="alert alert-success">
+          <div class="alert-title">
+            {{ __('Welcome') }} {{ $page.props.auth.user.name }}
+          </div>
+          <div class="text-muted">
+            {{ __('You are logged in!') }}
           </div>
         </div>
       </div>
