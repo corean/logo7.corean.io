@@ -16,6 +16,9 @@ class MembershipController extends Controller
             ->with('member')
             ->paginate(10);
 
-        return Inertia::render('Admin/Memberships/Index', ['memberships' => MembershipResource::collection($memberships)]);
+        return Inertia::render('Admin/Memberships/Index',
+            [
+                'memberships' => MembershipResource::collection($memberships)
+            ]);
     }
 }
