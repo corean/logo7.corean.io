@@ -1,3 +1,4 @@
+import '@tabler/core/src/js/tabler.js'
 import './bootstrap'
 import '../css/app.css'
 
