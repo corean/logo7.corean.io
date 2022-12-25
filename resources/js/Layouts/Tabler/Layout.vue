@@ -25,11 +25,11 @@ const toggleDark = useToggle(isDark)
           <h1
             class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3"
           >
-            <a href=".">
+            <Link :href="route('landing')">
               <ApplicationLogo
                 class="_block _h-9 _w-auto _fill-current _text-gray-800"
               />
-            </a>
+            </Link>
           </h1>
           <div
             v-if="$page.props.auth.user !== null"

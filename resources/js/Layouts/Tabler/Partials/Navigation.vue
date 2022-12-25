@@ -1,3 +1,6 @@
+<script setup>
+import { Link } from '@inertiajs/inertia-vue3'
+</script>
 <template>
   <div class="navbar-expand-md">
     <div class="collapse navbar-collapse" id="navbar-menu">
@@ -5,7 +8,7 @@
         <div class="container-xl">
           <ul class="navbar-nav">
             <li class="nav-item" :class="{ active: route().current('home') }">
-              <a class="nav-link" :href="route('home')">
+              <Link class="nav-link" :href="route('home')">
                 <span class="nav-link-icon d-md-none d-lg-inline-block"
                   ><!-- Download SVG icon from http://tabler-icons.io/i/home -->
                   <svg
@@ -29,7 +32,7 @@
                 <span class="nav-link-title">
                   {{ __('Dashboard') }}
                 </span>
-              </a>
+              </Link>
             </li>
 
             <li
@@ -65,7 +68,7 @@
             </li>
 
             <li class="nav-item" :class="{ active: route().current('test') }">
-              <a class="nav-link" href="/test">
+              <Link class="nav-link" :href="route('test')">
                 <span class="nav-link-icon d-md-none d-lg-inline-block"
                   ><!-- Download SVG icon from http://tabler-icons.io/i/file-text -->
                   <svg
@@ -89,14 +92,14 @@
                 <span class="nav-link-title">
                   {{ __('test') }}
                 </span>
-              </a>
+              </Link>
             </li>
 
             <li
               class="nav-item"
               :class="{ active: route().current('default-layout') }"
             >
-              <a class="nav-link" href="/default-layout">
+              <Link class="nav-link" href="/default-layout">
                 <span class="nav-link-icon d-md-none d-lg-inline-block"
                   ><!-- Download SVG icon from http://tabler-icons.io/i/file-text -->
                   <svg
@@ -120,7 +123,7 @@
                 <span class="nav-link-title">
                   {{ __('default-layout') }}
                 </span>
-              </a>
+              </Link>
             </li>
 
             <li class="nav-item dropdown">

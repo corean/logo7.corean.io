@@ -24,9 +24,9 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion'     => PHP_VERSION,
     ]);
-});
+})->name('landing');
+
 Route::get('/test', function () {
-    sleep(2);
     return Inertia::render('Test');
 })->name('test');
 Route::get('/default-layout', function () {
