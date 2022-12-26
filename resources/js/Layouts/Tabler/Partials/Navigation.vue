@@ -104,7 +104,7 @@ import { Link } from '@inertiajs/inertia-vue3'
                   ><!-- Download SVG icon from http://tabler-icons.io/i/file-text -->
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    class="icon icon-tabler icon-tabler-info-circle"
+                    class="icon icon-tabler icon-tabler-layout-2"
                     width="24"
                     height="24"
                     viewBox="0 0 24 24"
@@ -115,9 +115,10 @@ import { Link } from '@inertiajs/inertia-vue3'
                     stroke-linejoin="round"
                   >
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                    <circle cx="12" cy="12" r="9"></circle>
-                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                    <polyline points="11 12 12 12 12 16 13 16"></polyline>
+                    <rect x="4" y="4" width="6" height="5" rx="2"></rect>
+                    <rect x="4" y="13" width="6" height="7" rx="2"></rect>
+                    <rect x="14" y="4" width="6" height="7" rx="2"></rect>
+                    <rect x="14" y="15" width="6" height="5" rx="2"></rect>
                   </svg>
                 </span>
                 <span class="nav-link-title">

@@ -12,6 +12,6 @@
 */
 
 return [
-    'next'     => '다음 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" data-tw-selected="1671958130530"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><polyline points="9 6 15 12 9 18"></polyline></svg>',
-    'previous' => '<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" data-tw-selected="1671958399002"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><polyline points="15 6 9 12 15 18"></polyline></svg> 이전',
+    'next'     => '다음 <i class="ti ti-chevron-right"></i>',
+    'previous' => '<i class="ti ti-chevron-left"></i> 이전',
 ];
