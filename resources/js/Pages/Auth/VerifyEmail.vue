@@ -23,14 +23,14 @@ const verificationLinkSent = computed(
   <GuestLayout>
     <Head title="Email Verification" />
 
-    <div class="mb-4 text-sm text-gray-600">
+    <div class="text-sm text-gray-600 _mb-4">
       Thanks for signing up! Before getting started, could you verify your email
       address by clicking on the link we just emailed to you? If you didn't
       receive the email, we will gladly send you another.
     </div>
 
     <div
-      class="mb-4 font-medium text-sm text-green-600"
+      class="font-medium text-sm text-green-600 _mb-4"
       v-if="verificationLinkSent"
     >
       A new verification link has been sent to the email address you provided

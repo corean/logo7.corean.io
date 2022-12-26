@@ -61,7 +61,7 @@ const toggleDark = useToggle(isDark)
                 >
                 <div class="dropdown-divider"></div>
                 <Link
-                  href="route('logout')"
+                  :href="route('logout')"
                   method="post"
                   as="button"
                   class="dropdown-item"

@@ -27,9 +27,9 @@ const submit = () => {
 
 <template>
   <GuestLayout>
-    <Head title="Log in" />
+    <Head :title="__('Log in')" />
 
-    <div v-if="status" class="mb-4 text-sm font-medium text-green-600">
+    <div v-if="status" class="_mb-4 _text-sm _font-medium _text-green-600">
       {{ status }}
     </div>
 
@@ -39,13 +39,13 @@ const submit = () => {
         <TextInput
           id="email"
           type="text"
-          class="mt-1 block w-full"
+          class="_mt-1 _block _w-full"
           v-model="form.email"
           required
           autofocus
           autocomplete="email"
         />
-        <InputError class="mt-2" :message="form.errors.email" />
+        <InputError class="_mt-2" :message="form.errors.email" />
       </div>
 
       <div class="mt-4">
@@ -53,35 +53,35 @@ const submit = () => {
         <TextInput
           id="password"
           type="password"
-          class="mt-1 block w-full"
+          class="_mt-1 _block _w-full"
           v-model="form.password"
           required
           autocomplete="current-password"
         />
-        <InputError class="mt-2" :message="form.errors.password" />
+        <InputError class="_mt-2" :message="form.errors.password" />
       </div>
 
-      <div class="mt-4 block">
-        <label class="flex items-center">
+      <div class="_mt-4 _block">
+        <label class="_flex _items-center">
           <Checkbox name="remember" v-model:checked="form.remember" />
-          <span class="ml-2 text-sm text-gray-600">
+          <span class="_ml-2 _text-sm _text-gray-600">
             {{ __('Remember me') }}
           </span>
         </label>
       </div>
 
-      <div class="mt-4 flex items-center justify-end">
+      <div class="_mt-4 _flex _items-center _justify-end">
         <Link
           v-if="canResetPassword"
           :href="route('password.request')"
-          class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          class="_rounded-md _text-sm _text-gray-600 _underline hover:_text-gray-900 focus:_outline-none focus:_ring-2 focus:_ring-indigo-500 focus:_ring-offset-2"
         >
           {{ __('Forgot your password?') }}
         </Link>
 
         <PrimaryButton
-          class="ml-4"
-          :class="{ 'opacity-25': form.processing }"
+          class="_ml-4"
+          :class="{ '_opacity-25': form.processing }"
           :disabled="form.processing"
         >
           {{ __('Log in') }}
