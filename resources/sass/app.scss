@@ -7,3 +7,20 @@ $assets-base: "../../../dist" !default;
 #app {
     height: 100vh;
 }
+
+@media (min-width: 768px) {
+    .navbar-expand-md.navbar-light .nav-item:hover,
+    .navbar-expand-md .navbar-light .nav-item:hover {
+        position: relative;
+    }
+    .navbar-expand-md.navbar-light .nav-item:hover:after,
+    .navbar-expand-md .navbar-light .nav-item:hover:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -0.25rem;
+        border: 0 var(--tblr-border-style) rgba(97,104,118,0.1);
+        border-bottom-width: 3px;
+    }
+}
