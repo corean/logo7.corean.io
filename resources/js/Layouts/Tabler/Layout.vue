@@ -1,16 +1,15 @@
 <script setup>
 import ApplicationLogo from '@/Components/ApplicationLogo.vue'
 import { Link } from '@inertiajs/inertia-vue3'
-import { useDark, useToggle } from '@vueuse/core'
 import Navigation from '@/Layouts/Tabler/Partials/Navigation.vue'
 import NavAlarm from '@/Layouts/Tabler/Partials/NavAlarm.vue'
 import NavUserMenu from '@/Layouts/Tabler/Partials/NavUserMenu.vue'
 import ThemeSelector from '@/Layouts/Tabler/Partials/ThemeSelector.vue'
-
-const isDark = useDark()
-const toggleDark = useToggle(isDark)
+import Flash from '@/Layouts/Tabler/Partials/Flash.vue'
 </script>
+
 <template>
+  <Flash />
   <div class="page">
     <div class="sticky-top">
       <header

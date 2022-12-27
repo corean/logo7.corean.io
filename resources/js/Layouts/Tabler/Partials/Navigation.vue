@@ -1,6 +1,7 @@
 <script setup>
 import { Link } from '@inertiajs/inertia-vue3'
 </script>
+
 <template>
   <div class="navbar-expand-md">
     <div class="collapse navbar-collapse" id="navbar-menu">
@@ -91,6 +92,34 @@ import { Link } from '@inertiajs/inertia-vue3'
                 </span>
                 <span class="nav-link-title">
                   {{ __('test') }}
+                </span>
+              </Link>
+            </li>
+
+            <li class="nav-item" :class="{ active: route().current('toast') }">
+              <Link class="nav-link" :href="route('toast')">
+                <span class="nav-link-icon d-md-none d-lg-inline-block"
+                  ><!-- Download SVG icon from http://tabler-icons.io/i/file-text -->
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon icon-tabler icon-tabler-info-circle"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <circle cx="12" cy="12" r="9"></circle>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                    <polyline points="11 12 12 12 12 16 13 16"></polyline>
+                  </svg>
+                </span>
+                <span class="nav-link-title">
+                  {{ __('toast') }}
                 </span>
               </Link>
             </li>
