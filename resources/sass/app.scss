@@ -24,3 +24,7 @@ $assets-base: "../../../dist" !default;
         border-bottom-width: 3px;
     }
 }
+// 다크모드 일때 로고 전체 톤을 다운시킨다
+.theme-dark .navbar-brand-autodark {
+    filter: brightness(.7) invert(0);
+}

@@ -3,6 +3,9 @@ import ApplicationLogo from '@/Components/ApplicationLogo.vue'
 import { Link } from '@inertiajs/inertia-vue3'
 import { useDark, useToggle } from '@vueuse/core'
 import Navigation from '@/Layouts/Tabler/Partials/Navigation.vue'
+import NavAlarm from '@/Layouts/Tabler/Partials/NavAlarm.vue'
+import NavUserMenu from '@/Layouts/Tabler/Partials/NavUserMenu.vue'
+import ThemeSelector from '@/Layouts/Tabler/Partials/ThemeSelector.vue'
 
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
@@ -31,44 +34,17 @@ const toggleDark = useToggle(isDark)
               />
             </Link>
           </h1>
+
           <div
             v-if="$page.props.auth.user !== null"
             class="navbar-nav flex-row order-md-last"
           >
-            <div class="nav-item dropdown">
-              <a
-                href="#"
-                class="nav-link d-flex lh-1 text-reset p-0"
-                data-bs-toggle="dropdown"
-                aria-label="Open user menu"
-              >
-                <span
-                  class="avatar avatar-sm"
-                  :style="{
-                    'background-image': `url(https://eu.ui-avatars.com/api/?name=${$page.props.auth.user.name}`,
-                  }"
-                >
-                </span>
-                <div class="d-none d-xl-block ps-2">
-                  {{ $page.props.auth.user.name }}
-                </div>
-              </a>
-              <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <a
-                  href="{{--{{ route('profile.show') }}--}}"
-                  class="dropdown-item"
-                  >{{ __('Profile') }}</a
-                >
-                <div class="dropdown-divider"></div>
-                <Link
-                  :href="route('logout')"
-                  method="post"
-                  as="button"
-                  class="dropdown-item"
-                  >{{ __('Log Out') }}
-                </Link>
-              </div>
+            <div class="d-none d-md-flex">
+              <ThemeSelector />
+              <NavAlarm />
             </div>
+
+            <NavUserMenu />
           </div>
         </div>
       </header>
