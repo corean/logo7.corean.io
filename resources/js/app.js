@@ -1,5 +1,4 @@
 import '../css/app.css' // tailwindcss
-import './bootstrap'
 import '@tabler/core/src/js/tabler.js'
 
 import { createApp, h } from 'vue'
@@ -9,7 +8,6 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m'
 import translation from './translation'
 import Toast, { POSITION } from 'vue-toastification'
-import 'vue-toastification/dist/index.css'
 
 const appName =
   window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel'
