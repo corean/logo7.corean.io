@@ -5,11 +5,9 @@ import Navigation from '@/Layouts/Tabler/Partials/Navigation.vue'
 import NavAlarm from '@/Layouts/Tabler/Partials/NavAlarm.vue'
 import NavUserMenu from '@/Layouts/Tabler/Partials/NavUserMenu.vue'
 import ThemeSelector from '@/Layouts/Tabler/Partials/ThemeSelector.vue'
-import Flash from '@/Layouts/Tabler/Partials/Flash.vue'
 </script>
 
 <template>
-  <Flash />
   <div class="page">
     <div class="sticky-top">
       <header

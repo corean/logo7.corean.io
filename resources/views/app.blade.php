@@ -9,7 +9,7 @@
     <!-- Fonts -->
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     <link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css' rel='stylesheet' type='text/css'>
-    {{--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons@latest/iconfont/tabler-icons.min.css">--}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons@latest/iconfont/tabler-icons.min.css">
 
     <!-- Scripts -->
     @routes
