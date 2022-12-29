@@ -26,7 +26,7 @@ class MembershipController extends Controller
         $memberships = $memberships
             ->with('member')
             ->orderByRaw('ISNULL(confirmed_at) DESC, confirmed_at DESC, created_at DESC')
-            ->paginate(10);
+            ->paginate(20);
 
         return Inertia::render('Admin/Memberships/Index',
             [

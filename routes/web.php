@@ -57,7 +57,7 @@ Route::middleware('auth')->group(function () {
         ->as('admin.')
         ->group(function () {
             Route::resource('memberships', MembershipController::class)
-                ->only(['index']);
+                ->only(['index', 'edit', 'update', 'destroy',]);
         });
 });
 

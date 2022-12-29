@@ -1,6 +1,6 @@
 <script setup>
 import Layout from '@/Layouts/Tabler/Layout.vue'
-import { Head, useForm } from '@inertiajs/inertia-vue3'
+import { Head, Link, useForm } from '@inertiajs/inertia-vue3'
 import Pagination from '@/Components/Pagination.vue'
 import { numberFormat } from '@/helpers/filter'
 
@@ -80,26 +80,7 @@ const form = useForm({
                   <tr>
                     <th class="w-1">
                       No.
-                      <!-- Download SVG icon from http://tabler-icons.io/i/chevron-down -->
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="icon icon-sm icon-thick"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        stroke-width="2"
-                        stroke="currentColor"
-                        fill="none"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <path
-                          stroke="none"
-                          d="M0 0h24v24H0z"
-                          fill="none"
-                        ></path>
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                      </svg>
+                      <i class="icon icon-sm icon-thick ti ti-chevron-down" />
                     </th>
                     <th scope="col">아이디</th>
                     <th scope="col">등급</th>
@@ -115,7 +96,12 @@ const form = useForm({
                     v-for="membership in memberships.data"
                     key="membership.no"
                   >
-                    <td>{{ membership.no }}</td>
+                    <td>
+                      <Link
+                        :href="route('admin.memberships.edit', membership.no)"
+                        >{{ membership.no }}</Link
+                      >
+                    </td>
                     <td>{{ membership.id }}</td>
                     <td>{{ membership.grade }}</td>
                     <td>
@@ -136,19 +122,59 @@ const form = useForm({
                       {{ membership.completedCount }}
                     </td>
                     <td class="text-end">
-                      <span class="dropdown">
-                        <button
-                          class="btn dropdown-toggle align-text-top"
-                          data-bs-boundary="viewport"
-                          data-bs-toggle="dropdown"
+                      <div
+                        v-if="membership.confirmed_at"
+                        class="btn-list flex-nowrap"
+                      >
+                        <Link
+                          :href="
+                            route('admin.memberships.destroy', membership.no)
+                          "
+                          class="btn btn-outline"
                         >
-                          Actions
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-end">
-                          <a class="dropdown-item" href="#"> Action </a>
-                          <a class="dropdown-item" href="#"> Another </a>
+                          <!-- https://tabler-icons.io/i/check -->
+                          <i
+                            class="icon ti ti-arrow-back-up text-red"
+                          />입금취소</Link
+                        >
+                      </div>
+                      <div v-else class="btn-list flex-nowrap">
+                        <Link
+                          :href="
+                            route('admin.memberships.destroy', membership.no)
+                          "
+                          class="btn btn-outline"
+                        >
+                          <i
+                            class="icon ti ti-check text-success"
+                          />입금확인</Link
+                        >
+                        <Link
+                          :href="
+                            route('admin.memberships.destroy', membership.no)
+                          "
+                          class="btn btn-outline"
+                        >
+                          <i class="icon ti ti-x text-danger" />{{
+                            __('삭제')
+                          }}</Link
+                        >
+                        <!--
+                        <div class="dropdown">
+                          <button
+                            class="btn dropdown-toggle align-text-top"
+                            data-bs-boundary="viewport"
+                            data-bs-toggle="dropdown"
+                          >
+                            Actions
+                          </button>
+                          <div class="dropdown-menu dropdown-menu-end">
+                            <a class="dropdown-item" href="#"> Action </a>
+                            <a class="dropdown-item" href="#"> Another </a>
+                          </div>
                         </div>
-                      </span>
+                        -->
+                      </div>
                     </td>
                   </tr>
                 </tbody>
