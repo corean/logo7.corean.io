@@ -60,24 +60,11 @@ class Membership extends Model
         return $this->save();
     }
 
-    public function confirmCancel(): void
+    public function confirmCancel()
     {
         // 입금확인 내역 업데이트
         $this->confirmed_at = null;
         $this->Amount = 0;
-
-        // 회원 정보 업데이트
-        $this->member()
-            ->update(
-                [
-                    'membership' => 12,
-                    'free_point' => 100,
-                    'down_point2' => 0,
-                    'membership_reg_date' => 0,
-                    'membership_until_date' => 0,
-                ]
-            );
-        $this->save();
 
         // 쪽지 발송
         $memo = Memo::where('target_no', $this->member->no)
@@ -103,6 +90,22 @@ class Membership extends Model
                 ]
             );
         }
+
+        // 회원 정보 업데이트
+        $this->member()
+            ->update(
+                [
+                    'membership' => 12,
+                    'free_point' => 100,
+                    'down_point2' => 0,
+                    'membership_reg_date' => 0,
+                    'membership_until_date' => 0,
+                ]
+            );
+        return $this->save();
+
+
+
     }
 
     /**

@@ -45,7 +45,13 @@ class HandleInertiaRequests extends Middleware
             'language' => fn() => translations(
                 resource_path('lang/'.app()->getLocale().'.json')
             ),
-            'flash'    => fn() => $request->session()->get('flash'),
+            'flash'    => [
+                'message' => session('message'),
+                'success' => session('success'),
+                'info'    => session('info'),
+                'warning' => session('warning'),
+                'danger'  => session('danger'),
+            ],
         ]);
     }
 }

@@ -49,12 +49,15 @@ class MembershipController extends Controller
     {
         $membership = Membership::findOrFail($id);
         $membership_result = $membership->confirm();
-        $result = "confirmed. {$membership_result}";
 
-        if ($request->expectsJson()) {
-            return response()->json(['message' => $result]);
+        $category = 'danger';
+        $message = '오류가 발생했습니다';
+        if ($membership_result) {
+            $category = 'success';
+            $message = '입금처리되었습니다.';
         }
-        return redirect()->back();
+        return redirect()->route('admin.memberships.index')
+            ->with($category, $message);
     }
 
     /**
@@ -68,12 +71,15 @@ class MembershipController extends Controller
     {
         $membership = Membership::findOrFail($id);
         $membership_result = $membership->confirmCancel(); // 거래취소
-        $result = "confirm canceled. {$membership_result}";
 
-        if ($request->expectsJson()) {
-            return response()->json(['message' => $result]);
+        $category = 'danger';
+        $message = '오류가 발생했습니다';
+        if ($membership_result) {
+            $category = 'success';
+            $message = '취소되었습니다.';
         }
-        return redirect()->back();
+        return redirect()->route('admin.memberships.index')
+            ->with($category, $message);
     }
 
     /**
@@ -87,11 +93,14 @@ class MembershipController extends Controller
         $membership = Membership::findOrFail($id);
         $membership_result = $membership->cancel();
 
-        $result = "deleted. {$membership_result}";
-
-        if ($request->expectsJson()) {
-            return response()->json(['message' => $result]);
+        $category = 'danger';
+        $message = '오류가 발생했습니다';
+        if ($membership_result) {
+            $category = 'success';
+            $message = '삭제되었습니다.';
         }
-        return redirect()->back();
+        return redirect()->route('admin.memberships.index')
+            ->with($category, $message);
+
     }
 }

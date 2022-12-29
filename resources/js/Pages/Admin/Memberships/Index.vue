@@ -20,28 +20,17 @@ const props = defineProps({
 const form = useForm({
   search: props.search,
 })
-const deleteMembership = (id) => {
-  console.warn('deleteMembership()', id)
-  if (confirm('삭제하시겠습니까?')) {
-    Inertia.delete(route('admin.memberships.destroy', id), {
-      preserveState: true,
-      preserveScroll: true,
-      onSuccess: () => {
-        toast.success('삭제되었습니다.')
-      },
-    })
+
+const deleteMembership = (id, name) => {
+  // console.warn('deleteMembership()', id)
+  if (confirm(`[${name}] 정말 삭제하시겠습니까?`)) {
+    Inertia.delete(route('admin.memberships.destroy', id))
   }
 }
-const cancelConfirmed = (id) => {
-  console.warn('cancelConfirmed()', id)
-  if (confirm('입금확인를 취소하시겠습니까??')) {
-    Inertia.put(route('admin.memberships.confirm-cancel', id), {
-      preserveState: true,
-      preserveScroll: true,
-      onSuccess: () => {
-        toast.success('취소되었습니다.')
-      },
-    })
+const cancelConfirmed = (id, name) => {
+  // console.warn('cancelConfirmed()', id)
+  if (confirm(`[${name}] 입금확인를 취소하시겠습니까?`)) {
+    Inertia.put(route('admin.memberships.confirm-cancel', id))
   }
 }
 </script>
@@ -53,6 +42,13 @@ const cancelConfirmed = (id) => {
     <div class="container-xl pt-4">
       <div class="row">
         <div class="col-12">
+          <div v-if="$page.props.flash.success" class="_mb-4 _text-blue-600">
+            {{ $page.props.flash.success }}
+          </div>
+          <div v-if="$page.props.flash.danger" class="_mb-4 _text-red-600">
+            {{ $page.props.flash.danger }}
+          </div>
+
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">연간회원</h3>
@@ -154,7 +150,12 @@ const cancelConfirmed = (id) => {
                         <button
                           type="button"
                           class="btn btn-outline"
-                          @click="cancelConfirmed(membership.no)"
+                          @click="
+                            cancelConfirmed(
+                              membership.no,
+                              membership.charge_name
+                            )
+                          "
                         >
                           <i
                             class="icon ti ti-arrow-back-up text-red"
@@ -175,25 +176,30 @@ const cancelConfirmed = (id) => {
                         <button
                           type="button"
                           class="btn btn-outline"
-                          @click="deleteMembership(membership.no)"
+                          @click="
+                            deleteMembership(
+                              membership.no,
+                              membership.charge_name
+                            )
+                          "
                         >
                           <i class="icon ti ti-x text-danger" />{{ __('삭제') }}
                         </button>
                         <!--
-                                            <div class="dropdown">
-                                              <button
-                                                class="btn dropdown-toggle align-text-top"
-                                                data-bs-boundary="viewport"
-                                                data-bs-toggle="dropdown"
-                                              >
-                                                Actions
-                                              </button>
-                                              <div class="dropdown-menu dropdown-menu-end">
-                                                <a class="dropdown-item" href="#"> Action </a>
-                                                <a class="dropdown-item" href="#"> Another </a>
-                                              </div>
-                                            </div>
-                                            -->
+                        <div class="dropdown">
+                          <button
+                            class="btn dropdown-toggle align-text-top"
+                            data-bs-boundary="viewport"
+                            data-bs-toggle="dropdown"
+                          >
+                            Actions
+                          </button>
+                          <div class="dropdown-menu dropdown-menu-end">
+                            <a class="dropdown-item" href="#"> Action </a>
+                            <a class="dropdown-item" href="#"> Another </a>
+                          </div>
+                        </div>
+                        -->
                       </div>
                     </td>
                   </tr>
