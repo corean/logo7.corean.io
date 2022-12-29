@@ -1,17 +1,28 @@
 <script setup>
 import Layout from '@/Layouts/Tabler/Layout.vue'
-import { Head } from '@inertiajs/inertia-vue3'
+import { Head, useForm } from '@inertiajs/inertia-vue3'
 import Pagination from '@/Components/Pagination.vue'
-import { numberFormat} from '@/helpers/filter'
+import { numberFormat } from '@/helpers/filter'
 
-defineProps({
+const props = defineProps({
+  title: {
+    type: String,
+    default: '연간회원',
+  },
   memberships: Object,
+  search: {
+    type: String,
+    default: '',
+  },
 })
 
+const form = useForm({
+  search: props.search,
+})
 </script>
 
 <template>
-  <Head title="연간회원" />
+  <Head :title="props.title" />
 
   <Layout>
     <div class="container-xl pt-4">
@@ -21,16 +32,21 @@ defineProps({
             <div class="card-header">
               <h3 class="card-title">연간회원</h3>
 
-                <div class="ms-auto text-muted">
-                Search:
-                <div class="ms-2 d-inline-block">
+              <div class="ms-auto text-muted">
+                <form
+                  @submit.prevent="form.get(route('admin.memberships.index'))"
+                >
+                  Search:
+                  <div class="ms-2 d-inline-block">
                     <input
-                        type="text"
-                        class="form-control form-control-sm"
-                        aria-label="Search invoice"
+                      type="text"
+                      v-model="form.search"
+                      class="form-control form-control-sm"
+                      aria-label="Search invoice"
                     />
-                </div>
-            </div>
+                  </div>
+                </form>
+              </div>
             </div>
             <div class="table-responsive">
               <table
@@ -71,7 +87,10 @@ defineProps({
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="membership in memberships.data" key="membership.no">
+                  <tr
+                    v-for="membership in memberships.data"
+                    key="membership.no"
+                  >
                     <td>{{ membership.no }}</td>
                     <td>{{ membership.id }}</td>
                     <td>{{ membership.grade }}</td>
@@ -83,9 +102,15 @@ defineProps({
                         {{ membership.charge_name }}
                       </span>
                     </td>
-                    <td>{{ membership.mobile }}</td>
+                    <td>
+                      <a :href="`sms:${membership.mobile}`">{{
+                        membership.mobile
+                      }}</a>
+                    </td>
                     <td>{{ membership.diffForHumans }}</td>
-                    <td class='text-end w-4'>{{ membership.completedCount }}</td>
+                    <td class="text-end w-4">
+                      {{ membership.completedCount }}
+                    </td>
                     <td class="text-end">
                       <span class="dropdown">
                         <button
@@ -113,7 +138,10 @@ defineProps({
                 >까지
               </p>
 
-              <Pagination :data="memberships.meta" />
+              <Pagination
+                v-if="memberships.meta.last_page > 1"
+                :data="memberships.meta"
+              />
             </div>
           </div>
         </div>
