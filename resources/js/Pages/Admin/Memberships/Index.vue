@@ -3,6 +3,7 @@ import Layout from '@/Layouts/Tabler/Layout.vue'
 import { Head, Link, useForm } from '@inertiajs/inertia-vue3'
 import Pagination from '@/Components/Pagination.vue'
 import { numberFormat } from '@/helpers/filter'
+import { Inertia } from '@inertiajs/inertia'
 
 const props = defineProps({
   title: {
@@ -19,6 +20,30 @@ const props = defineProps({
 const form = useForm({
   search: props.search,
 })
+const deleteMembership = (id) => {
+  console.warn('deleteMembership()', id)
+  if (confirm('삭제하시겠습니까?')) {
+    Inertia.delete(route('admin.memberships.destroy', id), {
+      preserveState: true,
+      preserveScroll: true,
+      onSuccess: () => {
+        toast.success('삭제되었습니다.')
+      },
+    })
+  }
+}
+const cancelConfirmed = (id) => {
+  console.warn('cancelConfirmed()', id)
+  if (confirm('입금확인를 취소하시겠습니까??')) {
+    Inertia.put(route('admin.memberships.confirm-cancel', id), {
+      preserveState: true,
+      preserveScroll: true,
+      onSuccess: () => {
+        toast.success('취소되었습니다.')
+      },
+    })
+  }
+}
 </script>
 
 <template>
@@ -99,8 +124,8 @@ const form = useForm({
                     <td>
                       <Link
                         :href="route('admin.memberships.edit', membership.no)"
-                        >{{ membership.no }}</Link
-                      >
+                        >{{ membership.no }}
+                      </Link>
                     </td>
                     <td>{{ membership.id }}</td>
                     <td>{{ membership.grade }}</td>
@@ -126,54 +151,49 @@ const form = useForm({
                         v-if="membership.confirmed_at"
                         class="btn-list flex-nowrap"
                       >
-                        <Link
-                          :href="
-                            route('admin.memberships.destroy', membership.no)
-                          "
+                        <button
+                          type="button"
                           class="btn btn-outline"
+                          @click="cancelConfirmed(membership.no)"
                         >
-                          <!-- https://tabler-icons.io/i/check -->
                           <i
                             class="icon ti ti-arrow-back-up text-red"
-                          />입금취소</Link
-                        >
+                          />입금취소
+                        </button>
                       </div>
                       <div v-else class="btn-list flex-nowrap">
                         <Link
+                          method="put"
+                          as="button"
                           :href="
-                            route('admin.memberships.destroy', membership.no)
+                            route('admin.memberships.confirm', membership.no)
                           "
                           class="btn btn-outline"
                         >
-                          <i
-                            class="icon ti ti-check text-success"
-                          />입금확인</Link
-                        >
-                        <Link
-                          :href="
-                            route('admin.memberships.destroy', membership.no)
-                          "
+                          <i class="icon ti ti-check text-success" />입금확인
+                        </Link>
+                        <button
+                          type="button"
                           class="btn btn-outline"
+                          @click="deleteMembership(membership.no)"
                         >
-                          <i class="icon ti ti-x text-danger" />{{
-                            __('삭제')
-                          }}</Link
-                        >
+                          <i class="icon ti ti-x text-danger" />{{ __('삭제') }}
+                        </button>
                         <!--
-                        <div class="dropdown">
-                          <button
-                            class="btn dropdown-toggle align-text-top"
-                            data-bs-boundary="viewport"
-                            data-bs-toggle="dropdown"
-                          >
-                            Actions
-                          </button>
-                          <div class="dropdown-menu dropdown-menu-end">
-                            <a class="dropdown-item" href="#"> Action </a>
-                            <a class="dropdown-item" href="#"> Another </a>
-                          </div>
-                        </div>
-                        -->
+                                            <div class="dropdown">
+                                              <button
+                                                class="btn dropdown-toggle align-text-top"
+                                                data-bs-boundary="viewport"
+                                                data-bs-toggle="dropdown"
+                                              >
+                                                Actions
+                                              </button>
+                                              <div class="dropdown-menu dropdown-menu-end">
+                                                <a class="dropdown-item" href="#"> Action </a>
+                                                <a class="dropdown-item" href="#"> Another </a>
+                                              </div>
+                                            </div>
+                                            -->
                       </div>
                     </td>
                   </tr>

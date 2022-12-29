@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * @method static findOrFail($id)
+ */
 class Membership extends Model
 {
     use SoftDeletes;
@@ -19,6 +22,11 @@ class Membership extends Model
         'chargename',
         'mobile',
     ];
+
+    public function member()
+    {
+        return $this->belongsTo(Member::class, 'id', 'id');
+    }
 
     public function confirm(): bool
     {
@@ -50,11 +58,6 @@ class Membership extends Model
         );
 
         return $this->save();
-    }
-
-    public function member()
-    {
-        return $this->belongsTo(Member::class, 'id', 'id');
     }
 
     public function confirmCancel(): void
@@ -100,6 +103,34 @@ class Membership extends Model
                 ]
             );
         }
+    }
+
+    /**
+     * 연간회원 신청내역 삭제
+     * @param $query
+     * @param $id
+     * @return mixed
+     */
+    public function cancel()
+    {
+        $this->member()
+            ->update([
+                'membership'            => 12,
+                'down_point2'           => 0,
+                'membership_reg_date'   => 0,
+                'membership_until_date' => 0,
+            ]);
+
+        // 쪽지 보내기
+        Memo::create([
+            'target_no' => $this->member->no,
+            'from_no'   => 1,
+            'from_name' => 'logo',
+            'ment'      => '현재 미확인입금자로 시일이 지나 신청내역을 삭제하였습니다.<br />재신청은 초기화면 우측 [연간회원 신청]란을 이용해주시기 바랍니다.',
+            'time'      => time(),
+        ]);
+
+        return $this->delete();
     }
 
     public function completed()

@@ -41,7 +41,7 @@ Route::get('/tabler', function () {
     return view('tabler');
 })->name('tabler');
 
-Route::get('/toast',[\App\Http\Controllers\TestController::class, 'toast'])->name('toast');
+Route::get('/toast', [\App\Http\Controllers\TestController::class, 'toast'])->name('toast');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -56,6 +56,11 @@ Route::middleware('auth')->group(function () {
         ->prefix('admin')
         ->as('admin.')
         ->group(function () {
+            // 연간회원
+            Route::put('memberships/{id}/confirm',
+                [MembershipController::class, 'confirm'])->name('memberships.confirm');
+            Route::put('memberships/{id}/confirm-cancel',
+                [MembershipController::class, 'confirmCancel'])->name('memberships.confirm-cancel');
             Route::resource('memberships', MembershipController::class)
                 ->only(['index', 'edit', 'update', 'destroy',]);
         });

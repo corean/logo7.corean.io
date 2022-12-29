@@ -1,6 +1,5 @@
 <script setup>
-import { Link } from '@inertiajs/inertia-vue3'
-</script>
+import { Link } from '@inertiajs/inertia-vue3'</script>
 
 <template>
   <div class="navbar-expand-md">
@@ -192,7 +191,7 @@ import { Link } from '@inertiajs/inertia-vue3'
                 <span class="nav-link-title"> 관리자 </span>
               </a>
               <div class="dropdown-menu">
-                <a class="dropdown-item" :href="route('admin.memberships.index')"> 연간회원 </a>
+                <Link class="dropdown-item" :href="route('admin.memberships.index')"> 연간회원 </link>
 
               </div>
             </li>
