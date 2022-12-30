@@ -38,3 +38,6 @@ $assets-base: "../../../dist" !default;
 .btn .icon {
     --tblr-btn-padding-x: .25rem;
 }
+.sticky-top {
+    z-index: 30;
+}

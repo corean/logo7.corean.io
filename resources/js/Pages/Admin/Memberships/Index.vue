@@ -4,6 +4,8 @@ import { Head, Link, useForm } from '@inertiajs/inertia-vue3'
 import Pagination from '@/Components/Pagination.vue'
 import { numberFormat } from '@/helpers/filter'
 import { Inertia } from '@inertiajs/inertia'
+import Modal from '@/Components/Modal.vue'
+import { ref } from 'vue'
 
 const props = defineProps({
   title: {
@@ -33,6 +35,14 @@ const cancelConfirmed = (id, name) => {
     Inertia.put(route('admin.memberships.confirm-cancel', id))
   }
 }
+
+const showModal = ref(false)
+const closeModal = () => {
+  showModal.value = false
+}
+const showEdit = () => {
+  showModal.value = true
+}
 </script>
 
 <template>
@@ -48,6 +58,16 @@ const cancelConfirmed = (id, name) => {
           <div v-if="$page.props.flash.danger" class="_mb-4 _text-red-600">
             {{ $page.props.flash.danger }}
           </div>
+
+          <Modal
+            :show="showModal"
+            max-width="2xl"
+            :closeable="true"
+            @close="closeModal"
+          >
+            <div class="p-3">Test</div>
+          </Modal>
+          <button @click="showEdit" class="btn btn-default">modal</button>
 
           <div class="card">
             <div class="card-header">
