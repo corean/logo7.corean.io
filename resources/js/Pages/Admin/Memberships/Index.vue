@@ -13,14 +13,15 @@ const props = defineProps({
     default: '연간회원',
   },
   memberships: Object,
-  search: {
+  membership: Object,
+  keyword: {
     type: String,
     default: '',
   },
 })
 
 const form = useForm({
-  search: props.search,
+  keyword: props.keyword,
 })
 
 const deleteMembership = (id, name) => {
@@ -104,7 +105,7 @@ const showEdit = () => {
                       </span>
                       <input
                         type="text"
-                        v-model="form.search"
+                        v-model="form.keyword"
                         class="form-control"
                         placeholder="Search…"
                       />

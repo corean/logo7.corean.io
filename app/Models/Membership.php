@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @method static findOrFail($id)
+ * @method static filter(\App\Filters\MembershipFilters $filters)
  */
 class Membership extends Model
 {
@@ -23,7 +25,12 @@ class Membership extends Model
         'mobile',
     ];
 
-    public function member()
+    public function scopeFilter($query, $filter)
+    {
+        return $filter->apply($query);
+    }
+
+    public function member(): BelongsTo
     {
         return $this->belongsTo(Member::class, 'id', 'id');
     }
@@ -60,7 +67,7 @@ class Membership extends Model
         return $this->save();
     }
 
-    public function confirmCancel()
+    public function confirmCancel(): bool
     {
         // 입금확인 내역 업데이트
         $this->confirmed_at = null;
@@ -103,9 +110,6 @@ class Membership extends Model
                 ]
             );
         return $this->save();
-
-
-
     }
 
     /**

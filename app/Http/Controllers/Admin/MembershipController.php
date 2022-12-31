@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Filters\MembershipFilters;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\MembershipResource;
 use App\Models\Membership;
@@ -12,29 +13,19 @@ use Inertia\Inertia;
 
 class MembershipController extends Controller
 {
-    public function index(Request $request)
+    public function index(MembershipFilters $filters)
     {
-        $search = $request->input('search');
-
-        $memberships = Membership::query();
-        if ($request->input('search')) {
-            $memberships = $memberships->where(
-                'chargename',
-                'like',
-                '%'.$search.'%'
-            );
-        }
-
-        $memberships = $memberships
+        $keyword = request('keyword');
+        $memberships = Membership::filter($filters)
             ->with('member')
             ->orderByRaw('ISNULL(confirmed_at) DESC, confirmed_at DESC, created_at DESC')
             ->paginate(20);
 
         return Inertia::render('Admin/Memberships/Index',
             [
-                'title'       => '연간회원'.($search ? " ?{$search}" : ''),
+                'title'       => '연간회원'.($keyword ? " ?{$keyword}" : ''),
+                'keyword'      => $keyword,
                 'memberships' => MembershipResource::collection($memberships),
-                'search'      => $search,
             ]);
     }
 
