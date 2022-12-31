@@ -4,8 +4,8 @@ import { Head, Link, useForm } from '@inertiajs/inertia-vue3'
 import Pagination from '@/Components/Pagination.vue'
 import { numberFormat } from '@/helpers/filter'
 import { Inertia } from '@inertiajs/inertia'
-import Modal from '@/Components/Modal.vue'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
+import MembershipEdit from '@/Pages/Admin/Memberships/MembershipEdit.vue'
 
 const props = defineProps({
   title: {
@@ -14,14 +14,23 @@ const props = defineProps({
   },
   memberships: Object,
   membership: Object,
-  keyword: {
-    type: String,
-    default: '',
-  },
+  form: Object,
 })
 
 const form = useForm({
-  keyword: props.keyword,
+  keyword: props.form.keyword,
+})
+
+// 페이지 이동시 쿼리 스트링 유지
+const query = computed(() => {
+  const queryString = {}
+  if (form.keyword) {
+    queryString.keyword = form.keyword
+  }
+  if (props.memberships.meta.current_page > 1) {
+    queryString.page = props.memberships.meta.current_page
+  }
+  return queryString
 })
 
 const deleteMembership = (id, name) => {
@@ -38,6 +47,7 @@ const cancelConfirmed = (id, name) => {
 }
 
 const showModal = ref(false)
+
 const closeModal = () => {
   showModal.value = false
 }
@@ -49,6 +59,17 @@ const showEdit = () => {
 <template>
   <Head :title="props.title" />
 
+  <MembershipEdit v-if="!!membership" :membership="membership" />
+  <!--
+    <Modal
+        :show="showModal"
+        max-width="2xl"
+        :closeable="true"
+        @close="closeModal"
+    >
+        <div class="p-3">Test</div>
+    </Modal>
+    -->
   <Layout>
     <div class="container-xl pt-4">
       <div class="row">
@@ -60,14 +81,6 @@ const showEdit = () => {
             {{ $page.props.flash.danger }}
           </div>
 
-          <Modal
-            :show="showModal"
-            max-width="2xl"
-            :closeable="true"
-            @close="closeModal"
-          >
-            <div class="p-3">Test</div>
-          </Modal>
           <button @click="showEdit" class="btn btn-default">modal</button>
 
           <div class="card">
@@ -143,17 +156,8 @@ const showEdit = () => {
                         :href="
                           route(
                             'admin.memberships.index',
-                            {
-                              membership: membership.no,
-                              _query: {
-                                page: memberships.meta.current_page,
-                                keyword: form.keyword,
-                              },
-                            },
-                            {
-                              preserveState: true,
-                              replace: true,
-                            }
+                            { membership: membership.no, _query: query },
+                            { preserveState: true, replace: true }
                           )
                         "
                         >{{ membership.no }}

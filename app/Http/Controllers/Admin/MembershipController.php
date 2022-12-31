@@ -6,7 +6,6 @@ use App\Filters\MembershipFilters;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\MembershipResource;
 use App\Models\Membership;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -23,7 +22,7 @@ class MembershipController extends Controller
         return Inertia::render('Admin/Memberships/Index',
             [
                 'title'       => '연간회원'.(request('keyword') ? ' ?'.request('keyword') : ''),
-                'keyword'     => request('keyword'),
+                'form'     => ['keyword' => request('keyword', ''),],
                 'memberships' => MembershipResource::collection($memberships),
                 'membership'  => $membership ? new MembershipResource($membership) : null,
             ]);
@@ -34,7 +33,7 @@ class MembershipController extends Controller
      *
      * @param  Request  $request
      * @param           $id
-     * @return JsonResponse|RedirectResponse
+     * @return RedirectResponse
      */
     public function confirm(Request $request, $id)
     {
