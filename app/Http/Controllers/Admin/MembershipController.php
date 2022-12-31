@@ -13,9 +13,8 @@ use Inertia\Inertia;
 
 class MembershipController extends Controller
 {
-    public function index(MembershipFilters $filters)
+    public function index(MembershipFilters $filters, Membership $membership = null)
     {
-        $keyword = request('keyword');
         $memberships = Membership::filter($filters)
             ->with('member')
             ->orderByRaw('ISNULL(confirmed_at) DESC, confirmed_at DESC, created_at DESC')
@@ -23,9 +22,10 @@ class MembershipController extends Controller
 
         return Inertia::render('Admin/Memberships/Index',
             [
-                'title'       => '연간회원'.($keyword ? " ?{$keyword}" : ''),
-                'keyword'      => $keyword,
+                'title'       => '연간회원'.(request('keyword') ? ' ?'.request('keyword') : ''),
+                'keyword'     => request('keyword'),
                 'memberships' => MembershipResource::collection($memberships),
+                'membership'  => $membership ? new MembershipResource($membership) : null,
             ]);
     }
 
@@ -54,13 +54,11 @@ class MembershipController extends Controller
     /**
      * 연간회원 신청 취소처리
      *
-     * @param  Request  $request
-     * @param           $id
-     * @return JsonResponse|RedirectResponse
+     * @param  Membership  $membership
+     * @return RedirectResponse
      */
-    public function confirmCancel(Request $request, $id)
+    public function confirmCancel(Membership $membership)
     {
-        $membership = Membership::findOrFail($id);
         $membership_result = $membership->confirmCancel(); // 거래취소
 
         $category = 'danger';
@@ -76,12 +74,11 @@ class MembershipController extends Controller
     /**
      * 연간회원 신청내역 삭제 처리
      *
-     * @param  Request  $request
-     * @return JsonResponse|RedirectResponse
+     * @param  Membership  $membership
+     * @return RedirectResponse
      */
-    public function destroy(Request $request, $id)
+    public function destroy(Membership $membership)
     {
-        $membership = Membership::findOrFail($id);
         $membership_result = $membership->cancel();
 
         $category = 'danger';

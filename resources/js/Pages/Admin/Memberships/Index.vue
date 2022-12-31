@@ -140,7 +140,19 @@ const showEdit = () => {
                   >
                     <td>
                       <Link
-                        :href="route('admin.memberships.edit', membership.no)"
+                        :href="
+                          route(
+                            'admin.memberships.index',
+                            {
+                              membership: membership.no,
+                              keyword: keyword,
+                            },
+                            {
+                              preserveState: true,
+                              replace: true,
+                            }
+                          )
+                        "
                         >{{ membership.no }}
                       </Link>
                     </td>
