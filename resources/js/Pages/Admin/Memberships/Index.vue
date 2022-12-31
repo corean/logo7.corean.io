@@ -145,7 +145,10 @@ const showEdit = () => {
                             'admin.memberships.index',
                             {
                               membership: membership.no,
-                              keyword: keyword,
+                              _query: {
+                                page: memberships.meta.current_page,
+                                keyword: form.keyword,
+                              },
                             },
                             {
                               preserveState: true,
