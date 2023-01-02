@@ -2,9 +2,9 @@
 import Layout from '@/Layouts/Tabler/Layout.vue'
 import { Head, Link, useForm } from '@inertiajs/inertia-vue3'
 import Pagination from '@/Components/Pagination.vue'
-import { numberFormat } from '@/helpers/filter'
 import { Inertia } from '@inertiajs/inertia'
 import { computed, ref } from 'vue'
+import { numberFormat } from '@/helpers/filter'
 import MembershipEdit from '@/Pages/Admin/Memberships/MembershipEdit.vue'
 
 const props = defineProps({
@@ -47,29 +47,25 @@ const cancelConfirmed = (id, name) => {
 }
 
 const showModal = ref(false)
-
-const closeModal = () => {
-  showModal.value = false
-}
-const showEdit = () => {
-  showModal.value = true
-}
 </script>
 
 <template>
   <Head :title="props.title" />
 
-  <MembershipEdit v-if="!!membership" :membership="membership" />
-  <!--
-    <Modal
-        :show="showModal"
-        max-width="2xl"
-        :closeable="true"
-        @close="closeModal"
-    >
-        <div class="p-3">Test</div>
-    </Modal>
-    -->
+  <MembershipEdit
+    v-if="!!membership"
+    :membership="membership"
+    :query-string="query"
+  />
+  <!--<Modal
+    :show="showModal"
+    max-width="2xl"
+    :closeable="true"
+    @close="closeModal"
+  >
+    <div class="p-3">Test</div>
+  </Modal>-->
+
   <Layout>
     <div class="container-xl pt-4">
       <div class="row">
@@ -81,7 +77,9 @@ const showEdit = () => {
             {{ $page.props.flash.danger }}
           </div>
 
-          <button @click="showEdit" class="btn btn-default">modal</button>
+          <!--<button @click="showModal = true" class="btn btn-default">
+            modal
+          </button>-->
 
           <div class="card">
             <div class="card-header">
