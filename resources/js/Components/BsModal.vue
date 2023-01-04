@@ -65,65 +65,79 @@ const close = () => {
 
 <template>
   <teleport to="body">
-    <div
-      class="modal modal-blur fade"
-      :class="{ show: props.show }"
-      :style="{ display: props.show ? 'block' : 'none' }"
-      id="modal-report"
-      tabIndex="-1"
-      aria-modal="true"
-      role="dialog"
-      @click.self="close"
-    >
+    <Transition name="modal" appear>
       <div
-        class="modal-dialog modal-dialog-centered"
-        :class="maxWidthClass"
-        role="document"
+        class="modal modal-blur fade"
+        :class="{ show: props.show }"
+        :style="{ display: props.show ? 'block' : 'none' }"
+        id="modal-report"
+        tabIndex="-1"
+        aria-modal="true"
+        role="dialog"
+        @click.self="close"
       >
-        <div class="modal-content">
-          <div class="modal-header">
-            <slot name="modal-header" />
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-              @click="close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <slot />
-          </div>
-          <div class="modal-body">
-            <slot name="modal-body" />
-          </div>
-          <div class="modal-footer">
-            <a
-              href="#"
-              class="btn btn-link link-secondary"
-              @click="close"
-              data-bs-dismiss="modal"
-            >
-              취소
-            </a>
-            <slot name="modal-footer" />
+        <div
+          class="modal-dialog modal-dialog-centered"
+          :class="maxWidthClass"
+          role="document"
+        >
+          <div class="modal-content">
+            <div class="modal-header">
+              <slot name="modal-header" />
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+                @click="close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <slot />
+            </div>
+            <div class="modal-body">
+              <slot name="modal-body" />
+            </div>
+            <div class="modal-footer">
+              <a
+                href="#"
+                class="btn btn-link link-secondary"
+                @click="close"
+                data-bs-dismiss="modal"
+              >
+                취소
+              </a>
+              <slot name="modal-footer" />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </Transition>
 
-    <Transition name="modal-backdrop">
-      <div :class="{ show: props.show }" class="modal-backdrop fade show" />
+    <Transition name="modal-backdrop" appear>
+      <div
+        v-if="props.show"
+        :class="{ show: props.show }"
+        class="modal-backdrop fade show"
+      />
     </Transition>
   </teleport>
 </template>
 
 <style scoped>
-.modal-backdrop-enter-active,
-.modal-backdrop-leave-active {
-  transition: opacity 0.5s ease;
+.modal-enter-active,
+.modal-leave-active {
+  transition: transform 0.3s ease-out;
+}
+.modal-enter-from,
+.modal-leave-to {
+  transform: translateY(-1rem);
 }
 
+.modal-backdrop-enter-active,
+.modal-backdrop-leave-active {
+  transition: opacity 0.15s ease;
+}
 .modal-backdrop-enter-from,
 .modal-backdrop-leave-to {
   opacity: 0;

@@ -39,7 +39,7 @@ const onSubmit = () => {
 const isOpen = computed(() => !!props.membership)
 
 const closeModal = () => {
-  console.log('closeModal()')
+  // console.log('closeModal()')
   Inertia.get(route('admin.memberships.index', { _query: props.queryString }))
 }
 </script>

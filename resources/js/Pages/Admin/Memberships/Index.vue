@@ -1,9 +1,9 @@
 <script setup>
 import Layout from '@/Layouts/Tabler/Layout.vue'
-import { Head, Link, useForm } from '@inertiajs/inertia-vue3'
+import { Head, Link, useForm, usePage } from '@inertiajs/inertia-vue3'
 import Pagination from '@/Components/Pagination.vue'
 import { Inertia } from '@inertiajs/inertia'
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import { numberFormat } from '@/helpers/filter'
 import MembershipEdit from '@/Pages/Admin/Memberships/MembershipEdit.vue'
 import Alert from '@/Components/Alert.vue'
@@ -47,7 +47,9 @@ const cancelConfirmed = (id, name) => {
   }
 }
 
-const showModal = ref(false)
+const flash = computed(() => {
+  return usePage().props.value.flash
+})
 </script>
 
 <template>
@@ -69,7 +71,7 @@ const showModal = ref(false)
 
   <Layout>
     <div class="container-xl pt-4">
-      <Alert v-if="!!$page.props.flash" :flash="$page.props.flash" />
+      <Alert :flash="flash" />
 
       <div class="row">
         <div class="col-12">
