@@ -22,7 +22,7 @@ class MembershipController extends Controller
         return Inertia::render('Admin/Memberships/Index',
             [
                 'title'       => '연간회원'.(request('keyword') ? ' ?'.request('keyword') : ''),
-                'form'     => ['keyword' => request('keyword', ''),],
+                'form'        => ['keyword' => request('keyword', ''),],
                 'memberships' => MembershipResource::collection($memberships),
                 'membership'  => $membership ? new MembershipResource($membership) : null,
             ]);
@@ -31,9 +31,16 @@ class MembershipController extends Controller
     public function update(Membership $membership, Request $request)
     {
         // dd($membership, $request->all());
-        $membership->update($request->all());
+        $membership_result = $membership->update($request->all());
 
-        return redirect()->back();
+        $category = 'danger';
+        $message = '오류가 발생했습니다';
+        if ($membership_result) {
+            $category = 'success';
+            $message = '수정되었습니다.';
+        }
+
+        return redirect()->back()->with($category, $message);;
     }
 
     /**
@@ -53,8 +60,7 @@ class MembershipController extends Controller
             $category = 'success';
             $message = '입금처리되었습니다.';
         }
-        return redirect()->route('admin.memberships.index')
-            ->with($category, $message);
+        return redirect()->back()->with($category, $message);
     }
 
     /**
@@ -74,8 +80,8 @@ class MembershipController extends Controller
             $category = 'success';
             $message = '취소되었습니다.';
         }
-        return redirect()->route('admin.memberships.index')
-            ->with($category, $message);
+
+        return redirect()->back()->with($category, $message);
     }
 
     /**
@@ -94,8 +100,7 @@ class MembershipController extends Controller
             $category = 'success';
             $message = '삭제되었습니다.';
         }
-        return redirect()->route('admin.memberships.index')
-            ->with($category, $message);
 
+        return redirect()->back()->with($category, $message);
     }
 }

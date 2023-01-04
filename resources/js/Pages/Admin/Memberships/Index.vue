@@ -165,10 +165,10 @@ const showModal = ref(false)
                     <td>{{ membership.grade }}</td>
                     <td>
                       <strong v-if="membership.confirm">
-                        {{ membership.charge_name }}
+                        {{ membership.chargename }}
                       </strong>
                       <span v-else>
-                        {{ membership.charge_name }}
+                        {{ membership.chargename }}
                       </span>
                     </td>
                     <td>
@@ -191,7 +191,7 @@ const showModal = ref(false)
                           @click="
                             cancelConfirmed(
                               membership.no,
-                              membership.charge_name
+                              membership.chargename
                             )
                           "
                         >
@@ -217,7 +217,7 @@ const showModal = ref(false)
                           @click="
                             deleteMembership(
                               membership.no,
-                              membership.charge_name
+                              membership.chargename
                             )
                           "
                         >

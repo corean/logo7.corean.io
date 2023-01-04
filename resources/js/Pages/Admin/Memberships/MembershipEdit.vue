@@ -15,7 +15,7 @@ const props = defineProps({
 const form = useForm({
   no: props.membership.data.no,
   id: props.membership.data.id,
-  charge_name: props.membership.data.charge_name,
+  chargename: props.membership.data.chargename,
   mobile: props.membership.data.mobile,
   created_at: numberFormat(props.membership.data.created_at),
   confirmed_at: props.membership.data.confirmed_at,
@@ -79,14 +79,14 @@ const closeModal = () => {
       </div>
     </div>
     <div class="row mb-2">
-      <label class="offset-sm-1 col-2 col-form-label">이름</label>
+      <label class="offset-sm-1 col-2 col-form-label">입금자명</label>
       <div class="col-7">
         <input
           type="text"
           class="form-control"
-          name="charge_name"
+          name="chargename"
           placeholder="입금자명"
-          v-model="form.charge_name"
+          v-model="form.chargename"
         />
       </div>
     </div>
