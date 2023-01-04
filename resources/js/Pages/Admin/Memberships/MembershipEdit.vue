@@ -19,6 +19,7 @@ const form = useForm({
   mobile: props.membership.data.mobile,
   created_at: numberFormat(props.membership.data.created_at),
   confirmed_at: props.membership.data.confirmed_at,
+  page: props.queryString.page,
 })
 
 const onSubmit = () => {
@@ -29,17 +30,7 @@ const onSubmit = () => {
       preserveState: true,
       preserveScroll: true,
       onSuccess: () => {
-        Inertia.get(
-          route(
-            'admin.memberships.index',
-            { _query: props.queryString },
-            {
-              preserveState: true,
-              preserveScroll: true,
-              only: ['memberships'],
-            }
-          )
-        )
+        // closeModal()
       },
     }
   )
@@ -148,7 +139,8 @@ const closeModal = () => {
     </template>
 
     <template #modal-footer>
-      <Link
+      <a
+        href="#"
         @click="onSubmit"
         class="btn btn-primary ms-auto"
         data-bs-dismiss="modal"
@@ -156,7 +148,7 @@ const closeModal = () => {
         <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
         <i class="icon icon-thick ti ti-edit me-2"></i>
         수정하기
-      </Link>
+      </a>
     </template>
   </BsModal>
 </template>

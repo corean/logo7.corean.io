@@ -40,7 +40,8 @@ class MembershipController extends Controller
             $message = '수정되었습니다.';
         }
 
-        return redirect()->back()->with($category, $message);;
+        return redirect()->route('admin.memberships.index', ['page'=>$request->input('page', 1)])
+            ->with($category, $message);
     }
 
     /**

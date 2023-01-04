@@ -6,6 +6,7 @@ import { Inertia } from '@inertiajs/inertia'
 import { computed, ref } from 'vue'
 import { numberFormat } from '@/helpers/filter'
 import MembershipEdit from '@/Pages/Admin/Memberships/MembershipEdit.vue'
+import Alert from '@/Components/Alert.vue'
 
 const props = defineProps({
   title: {
@@ -68,19 +69,10 @@ const showModal = ref(false)
 
   <Layout>
     <div class="container-xl pt-4">
+      <Alert v-if="!!$page.props.flash" :flash="$page.props.flash" />
+
       <div class="row">
         <div class="col-12">
-          <div v-if="$page.props.flash.success" class="_mb-4 _text-blue-600">
-            {{ $page.props.flash.success }}
-          </div>
-          <div v-if="$page.props.flash.danger" class="_mb-4 _text-red-600">
-            {{ $page.props.flash.danger }}
-          </div>
-
-          <!--<button @click="showModal = true" class="btn btn-default">
-            modal
-          </button>-->
-
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">연간회원</h3>

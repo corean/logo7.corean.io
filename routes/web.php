@@ -63,7 +63,7 @@ Route::middleware('auth')->group(function () {
                 [MembershipController::class, 'confirm'])->name('memberships.confirm');
             Route::put('memberships/{membership}/confirm-cancel',
                 [MembershipController::class, 'confirmCancel'])->name('memberships.confirm-cancel');
-            Route::delete('memberships', [MembershipController::class, 'destroy']);
+            Route::delete('memberships/{membership}', [MembershipController::class, 'destroy'])->name('memberships.destroy');
         });
 });
 
