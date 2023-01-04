@@ -21,10 +21,11 @@ class MembershipResource extends JsonResource
             'confirm'        => $this->confirm,
             'charge_name'    => $this->chargename,
             'mobile'         => $this->mobile,
-            'confirmed_at'   => $this->confirmed_at,
-            'created_at'     => $this->created_at,
-            'diffForHumans'  => $this->created_at->diffForHumans(),
+            'confirmed_at'   => $this->confirmed_at?->format('Y-m-d H:i:s'),
+            'created_at'     => $this->created_at?->format('Y-m-d H:i:s'),
+            'diffForHumans'  => $this->created_at?->diffForHumans(),
             'completedCount' => $this->completedCount,
+            'completedList'  => $this->completed()->orderBy('confirmed_at', 'desc')->get(),
         ];
     }
 }

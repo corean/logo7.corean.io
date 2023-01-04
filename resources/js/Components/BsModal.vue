@@ -25,8 +25,8 @@ const emit = defineEmits(['close'])
 onMounted(() => document.addEventListener('keydown', closeOnEscape))
 
 onUnmounted(() => {
-    document.removeEventListener('keydown', closeOnEscape)
-    document.body.classList.add('modal-open')
+  document.removeEventListener('keydown', closeOnEscape)
+  document.body.classList.add('modal-open')
 })
 
 watch(
@@ -66,7 +66,6 @@ const close = () => {
 <template>
   <teleport to="body">
     <div
-      v-show="props.show"
       class="modal modal-blur fade"
       :class="{ show: props.show }"
       :style="{ display: props.show ? 'block' : 'none' }"
@@ -113,17 +112,20 @@ const close = () => {
       </div>
     </div>
 
-    <div
-      v-show="props.show"
-      :class="{ show: props.show }"
-      class="modal-backdrop fade"
-    ></div>
+    <Transition name="modal-backdrop">
+      <div :class="{ show: props.show }" class="modal-backdrop fade show" />
+    </Transition>
   </teleport>
 </template>
 
 <style scoped>
-.modal-footer a[data-bs-dismiss='modal']:hover {
-  text-decoration: none;
-  background-color: #dfdfdf;
+.modal-backdrop-enter-active,
+.modal-backdrop-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.modal-backdrop-enter-from,
+.modal-backdrop-leave-to {
+  opacity: 0;
 }
 </style>

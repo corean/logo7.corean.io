@@ -2,11 +2,48 @@
 import BsModal from '@/Components/BsModal.vue'
 import { computed } from 'vue'
 import { Inertia } from '@inertiajs/inertia'
+import { useForm } from '@inertiajs/inertia-vue3'
+import { numberFormat } from '@/helpers/filter'
+import moment from 'moment'
+import 'moment/locale/ko'
 
 const props = defineProps({
   membership: Object,
   queryString: Object,
 })
+
+const form = useForm({
+  no: props.membership.data.no,
+  id: props.membership.data.id,
+  charge_name: props.membership.data.charge_name,
+  mobile: props.membership.data.mobile,
+  created_at: numberFormat(props.membership.data.created_at),
+  confirmed_at: props.membership.data.confirmed_at,
+})
+
+const onSubmit = () => {
+  Inertia.put(
+    route('admin.memberships.update', props.membership.data.no),
+    form,
+    {
+      preserveState: true,
+      preserveScroll: true,
+      onSuccess: () => {
+        Inertia.get(
+          route(
+            'admin.memberships.index',
+            { _query: props.queryString },
+            {
+              preserveState: true,
+              preserveScroll: true,
+              only: ['memberships'],
+            }
+          )
+        )
+      },
+    }
+  )
+}
 
 const isOpen = computed(() => !!props.membership)
 
@@ -19,136 +56,107 @@ const closeModal = () => {
 <template>
   <BsModal :show="isOpen" max-width="lg" :closeable="true" @close="closeModal">
     <template #modal-header>
-      <h5 class="modal-title">New report</h5>
+      <h5 class="modal-title">연간회원 신청</h5>
     </template>
 
-    <div class="mb-3">
-      <label class="form-label">Name</label>
-      <input
-        type="text"
-        class="form-control"
-        name="example-text-input"
-        placeholder="Your report name"
-      />
-    </div>
-    <label class="form-label">Report type</label>
-    <div class="form-selectgroup-boxes row mb-3">
-      <div class="col-lg-6">
-        <label class="form-selectgroup-item">
-          <input
-            type="radio"
-            name="report-type"
-            value="1"
-            class="form-selectgroup-input"
-            checked=""
-          />
-          <span class="form-selectgroup-label d-flex align-items-center p-3">
-            <span class="me-3">
-              <span class="form-selectgroup-check"></span>
-            </span>
-            <span class="form-selectgroup-label-content">
-              <span class="form-selectgroup-title strong mb-1">Simple</span>
-              <span class="d-block text-muted"
-                >Provide only basic data needed for the report</span
-              >
-            </span>
-          </span>
-        </label>
-      </div>
-      <div class="col-lg-6">
-        <label class="form-selectgroup-item">
-          <input
-            type="radio"
-            name="report-type"
-            value="1"
-            class="form-selectgroup-input"
-          />
-          <span class="form-selectgroup-label d-flex align-items-center p-3">
-            <span class="me-3">
-              <span class="form-selectgroup-check"></span>
-            </span>
-            <span class="form-selectgroup-label-content">
-              <span class="form-selectgroup-title strong mb-1">Advanced</span>
-              <span class="d-block text-muted"
-                >Insert charts and additional advanced analyses to be inserted
-                in the report</span
-              >
-            </span>
-          </span>
-        </label>
+    <div class="row mb-2">
+      <label class="offset-sm-1 col-2 col-form-label">번호</label>
+      <div class="col-7 pt-1">
+        {{ props.membership.data.no }}
       </div>
     </div>
-    <div class="row">
-      <div class="col-lg-8">
-        <div class="mb-3">
-          <label class="form-label">Report url</label>
-          <div class="input-group input-group-flat">
-            <span class="input-group-text"> https://tabler.io/reports/ </span>
-            <input
-              type="text"
-              class="form-control ps-0"
-              value="report-01"
-              autocomplete="off"
-            />
-          </div>
-        </div>
+    <div class="row mb-2">
+      <label class="offset-sm-1 col-2 col-form-label">유저 ID</label>
+      <div class="col-7">
+        <input
+          type="text"
+          class="form-control"
+          name="id"
+          placeholder="유저ID"
+          v-model="props.membership.data.id"
+          disabled
+        />
       </div>
-      <div class="col-lg-4">
-        <div class="mb-3">
-          <label class="form-label">Visibility</label>
-          <select class="form-select">
-            <option value="1" selected="">Private</option>
-            <option value="2">Public</option>
-            <option value="3">Hidden</option>
-          </select>
-        </div>
+    </div>
+    <div class="row mb-2">
+      <label class="offset-sm-1 col-2 col-form-label">이름</label>
+      <div class="col-7">
+        <input
+          type="text"
+          class="form-control"
+          name="charge_name"
+          placeholder="입금자명"
+          v-model="form.charge_name"
+        />
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <label class="offset-sm-1 col-2 col-form-label">연락처</label>
+      <div class="col-7">
+        <input
+          type="text"
+          class="form-control"
+          name="mobile"
+          placeholder="연락처"
+          v-model="form.mobile"
+        />
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <label class="offset-sm-1 col-2 col-form-label">거래시간</label>
+      <div class="col-7">
+        <input
+          type="text"
+          class="form-control"
+          name="created_at"
+          placeholder="거래등록시간"
+          v-model="props.membership.data.created_at"
+          disabled
+        />
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <label class="offset-sm-1 col-2 col-form-label">확인시간</label>
+      <div class="col-7">
+        <input
+          type="text"
+          class="form-control"
+          name="created_at"
+          placeholder="확인시간"
+          v-model="props.membership.data.confirmed_at"
+          disabled
+        />
       </div>
     </div>
 
     <template #modal-body>
       <div class="row">
-        <div class="col-lg-6">
-          <div class="mb-3">
-            <label class="form-label">Client name</label>
-            <input type="text" class="form-control" />
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="mb-3">
-            <label class="form-label">Reporting period</label>
-            <input type="date" class="form-control" />
-          </div>
-        </div>
-        <div class="col-lg-12">
-          <div>
-            <label class="form-label">Additional information</label>
-            <textarea class="form-control" rows="3"></textarea>
-          </div>
+        <div class="offset-sm-1 col-2">연간회원이력</div>
+        <div class="col">
+          <ul v-if="membership.data.completedCount" cl>
+            <li v-for="(item, key) in membership.data.completedList" :key="key">
+              {{ moment(item.created_at).format('YYYY-MM-DD') }}
+              {{ item.chargename }}
+              {{ item.mobile }}
+            </li>
+          </ul>
         </div>
       </div>
     </template>
 
     <template #modal-footer>
-      <a href="#" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
+      <Link
+        @click="onSubmit"
+        class="btn btn-primary ms-auto"
+        data-bs-dismiss="modal"
+      >
         <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="icon"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          stroke-width="2"
-          stroke="currentColor"
-          fill="none"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-          <line x1="12" y1="5" x2="12" y2="19"></line>
-          <line x1="5" y1="12" x2="19" y2="12"></line>
-        </svg>
-        Create new report
-      </a>
+        <i class="icon icon-thick ti ti-edit me-2"></i>
+        수정하기
+      </Link>
     </template>
   </BsModal>
 </template>

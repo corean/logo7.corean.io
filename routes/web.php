@@ -58,10 +58,10 @@ Route::middleware('auth')->group(function () {
         ->group(function () {
             // 연간회원
             Route::get('memberships/{membership?}', [MembershipController::class, 'index'])->name('memberships.index');
-            Route::put('memberships', [MembershipController::class, 'update'])->name('memberships.update');
-            Route::put('memberships/{id}/confirm',
+            Route::put('memberships/{membership}', [MembershipController::class, 'update'])->name('memberships.update');
+            Route::put('memberships/{membership}/confirm',
                 [MembershipController::class, 'confirm'])->name('memberships.confirm');
-            Route::put('memberships/{id}/confirm-cancel',
+            Route::put('memberships/{membership}/confirm-cancel',
                 [MembershipController::class, 'confirmCancel'])->name('memberships.confirm-cancel');
             Route::delete('memberships', [MembershipController::class, 'destroy']);
         });

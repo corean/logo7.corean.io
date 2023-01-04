@@ -28,6 +28,14 @@ class MembershipController extends Controller
             ]);
     }
 
+    public function update(Membership $membership, Request $request)
+    {
+        // dd($membership, $request->all());
+        $membership->update($request->all());
+
+        return redirect()->back();
+    }
+
     /**
      * 연간회원 신청 처리
      *
@@ -35,9 +43,8 @@ class MembershipController extends Controller
      * @param           $id
      * @return RedirectResponse
      */
-    public function confirm(Request $request, $id)
+    public function confirm(Membership $membership)
     {
-        $membership = Membership::findOrFail($id);
         $membership_result = $membership->confirm();
 
         $category = 'danger';
@@ -58,6 +65,7 @@ class MembershipController extends Controller
      */
     public function confirmCancel(Membership $membership)
     {
+        // dd($membership);
         $membership_result = $membership->confirmCancel(); // 거래취소
 
         $category = 'danger';
