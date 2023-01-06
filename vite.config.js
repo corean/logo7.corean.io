@@ -7,6 +7,7 @@ export default defineConfig({
   plugins: [
     laravel({
       input: ['resources/sass/app.scss', 'resources/js/app.js'],
+      ssr: 'resources/js/ssr.js',
       refresh: true,
     }),
     vue({
@@ -18,6 +19,9 @@ export default defineConfig({
       },
     }),
   ],
+  ssr: {
+    noExternal: ['@inertiajs/server'],
+  },
   resolve: {
     alias: {
       '~bootstrap': path.resolve(__dirname, 'node_modules/bootstrap'),
