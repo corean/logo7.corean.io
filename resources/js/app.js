@@ -1,5 +1,6 @@
 import '../css/app.css' // tailwindcss
 import '@tabler/core/src/js/tabler.js'
+import '../sass/app.scss'
 
 import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/inertia-vue3'
