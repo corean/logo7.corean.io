@@ -47,6 +47,13 @@ const cancelConfirmed = (id, name) => {
   }
 }
 
+const confirmMembership = (id, name) => {
+  // console.warn('cancelConfirmed()', id)
+  if (confirm(`[${name}] 입금처리하시겠습니까?`)) {
+    Inertia.put(route('admin.memberships.confirm', id))
+  }
+}
+
 const flash = computed(() => {
   return usePage().props.value.flash
 })
@@ -61,13 +68,13 @@ const flash = computed(() => {
     :query-string="query"
   />
   <!--<Modal
-    :show="showModal"
-    max-width="2xl"
-    :closeable="true"
-    @close="closeModal"
-  >
-    <div class="p-3">Test</div>
-  </Modal>-->
+      :show="showModal"
+      max-width="2xl"
+      :closeable="true"
+      @close="closeModal"
+    >
+      <div class="p-3">Test</div>
+    </Modal>-->
 
   <Layout>
     <div class="container-xl pt-4">
@@ -195,16 +202,18 @@ const flash = computed(() => {
                         </button>
                       </div>
                       <div v-else class="btn-list flex-nowrap">
-                        <Link
-                          method="put"
-                          as="button"
-                          :href="
-                            route('admin.memberships.confirm', membership.no)
-                          "
+                        <button
+                          type="button"
                           class="btn btn-outline"
+                          @click="
+                            confirmMembership(
+                              membership.no,
+                              membership.chargename
+                            )
+                          "
                         >
                           <i class="icon ti ti-check text-success" />입금확인
-                        </Link>
+                        </button>
                         <button
                           type="button"
                           class="btn btn-outline"
@@ -218,20 +227,20 @@ const flash = computed(() => {
                           <i class="icon ti ti-x text-danger" />{{ __('삭제') }}
                         </button>
                         <!--
-                        <div class="dropdown">
-                          <button
-                            class="btn dropdown-toggle align-text-top"
-                            data-bs-boundary="viewport"
-                            data-bs-toggle="dropdown"
-                          >
-                            Actions
-                          </button>
-                          <div class="dropdown-menu dropdown-menu-end">
-                            <a class="dropdown-item" href="#"> Action </a>
-                            <a class="dropdown-item" href="#"> Another </a>
-                          </div>
-                        </div>
-                        -->
+                                            <div class="dropdown">
+                                              <button
+                                                class="btn dropdown-toggle align-text-top"
+                                                data-bs-boundary="viewport"
+                                                data-bs-toggle="dropdown"
+                                              >
+                                                Actions
+                                              </button>
+                                              <div class="dropdown-menu dropdown-menu-end">
+                                                <a class="dropdown-item" href="#"> Action </a>
+                                                <a class="dropdown-item" href="#"> Another </a>
+                                              </div>
+                                            </div>
+                                            -->
                       </div>
                     </td>
                   </tr>
