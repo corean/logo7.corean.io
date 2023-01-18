@@ -1,12 +1,13 @@
-import { createSSRApp, h } from 'vue'
+import { createInertiaApp } from '@inertiajs/vue3'
+import createServer from '@inertiajs/vue3/server'
 import { renderToString } from '@vue/server-renderer'
-import { createInertiaApp } from '@inertiajs/inertia-vue3'
-import createServer from '@inertiajs/server'
+import { createSSRApp, h } from 'vue'
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m'
 import translation from '@/translation'
 
-const appName = 'Laravel'
+const appName =
+  window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel'
 
 createServer((page) =>
   createInertiaApp({

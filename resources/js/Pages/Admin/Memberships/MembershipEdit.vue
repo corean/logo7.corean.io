@@ -1,8 +1,7 @@
 <script setup>
 import BsModal from '@/Components/BsModal.vue'
 import { computed } from 'vue'
-import { Inertia } from '@inertiajs/inertia'
-import { useForm } from '@inertiajs/inertia-vue3'
+import { router, useForm } from '@inertiajs/vue3'
 import { numberFormat } from '@/helpers/filter'
 import moment from 'moment'
 import 'moment/locale/ko'
@@ -23,7 +22,7 @@ const form = useForm({
 })
 
 const onSubmit = () => {
-  Inertia.put(
+  router.put(
     route('admin.memberships.update', props.membership.data.no),
     form,
     {
@@ -40,7 +39,7 @@ const isOpen = computed(() => !!props.membership)
 
 const closeModal = () => {
   // console.log('closeModal()')
-  Inertia.get(route('admin.memberships.index', { _query: props.queryString }))
+  router.get(route('admin.memberships.index', { _query: props.queryString }))
 }
 </script>
 

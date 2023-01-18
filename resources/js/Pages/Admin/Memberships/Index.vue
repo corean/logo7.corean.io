@@ -1,12 +1,11 @@
 <script setup>
-import Layout from '@/Layouts/Tabler/Layout.vue'
-import { Head, Link, useForm, usePage } from '@inertiajs/inertia-vue3'
-import Pagination from '@/Components/Pagination.vue'
-import { Inertia } from '@inertiajs/inertia'
 import { computed } from 'vue'
-import { numberFormat } from '@/helpers/filter'
-import MembershipEdit from '@/Pages/Admin/Memberships/MembershipEdit.vue'
+import { Head, Link, router, useForm } from '@inertiajs/vue3'
+import Pagination from '@/Components/Pagination.vue'
 import Alert from '@/Components/Alert.vue'
+import { numberFormat } from '@/helpers/filter'
+import Layout from '@/Layouts/Tabler/Layout.vue'
+import MembershipEdit from '@/Pages/Admin/Memberships/MembershipEdit.vue'
 
 const props = defineProps({
   title: {
@@ -37,26 +36,22 @@ const query = computed(() => {
 const deleteMembership = (id, name) => {
   // console.warn('deleteMembership()', id)
   if (confirm(`[${name}] 정말 삭제하시겠습니까?`)) {
-    Inertia.delete(route('admin.memberships.destroy', id))
+    router.delete(route('admin.memberships.destroy', id))
   }
 }
 const cancelConfirmed = (id, name) => {
   // console.warn('cancelConfirmed()', id)
   if (confirm(`[${name}] 입금확인를 취소하시겠습니까?`)) {
-    Inertia.put(route('admin.memberships.confirm-cancel', id))
+    router.put(route('admin.memberships.confirm-cancel', id))
   }
 }
 
 const confirmMembership = (id, name) => {
   // console.warn('cancelConfirmed()', id)
   if (confirm(`[${name}] 입금처리하시겠습니까?`)) {
-    Inertia.put(route('admin.memberships.confirm', id))
+    router.put(route('admin.memberships.confirm', id))
   }
 }
-
-const flash = computed(() => {
-  return usePage().props.value.flash
-})
 </script>
 
 <template>
@@ -78,7 +73,7 @@ const flash = computed(() => {
 
   <Layout>
     <div class="container-xl pt-4">
-      <Alert :flash="flash" />
+      <Alert />
 
       <div class="row">
         <div class="col-12">

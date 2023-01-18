@@ -1,18 +1,16 @@
 <script setup>
-const props = defineProps({
-  flash: {
-    type: Object,
-    default: () => {
-      return {}
-    },
-  },
+import { computed } from 'vue'
+import { usePage } from '@inertiajs/vue3'
+
+const flash = computed(() => {
+  return usePage().props.flash
 })
 </script>
 
 <template>
   <Transition name="alert" appear>
     <div
-      v-if="props.flash.success"
+      v-if="flash.success"
       class="alert alert-important alert-success alert-dismissible"
       role="alert"
     >
@@ -36,7 +34,7 @@ const props = defineProps({
           </svg>
         </div>
         <div>
-          {{ props.flash.success }}
+          {{ flash.success }}
         </div>
       </div>
       <a

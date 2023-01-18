@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import ApplicationLogo from '@/Components/ApplicationLogo.vue'
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue'
-import { Link } from '@inertiajs/inertia-vue3'
+import { Link } from '@inertiajs/vue3'
 import UserMenu from '@/Layouts/Default/Partials/UserMenu.vue'
 import NavMenu from '@/Layouts/Default/Partials/NavMenu.vue'
 import { useDark, useToggle } from '@vueuse/core'

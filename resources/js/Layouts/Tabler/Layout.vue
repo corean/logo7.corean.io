@@ -1,6 +1,6 @@
 <script setup>
 import ApplicationLogo from '@/Components/ApplicationLogo.vue'
-import { Link } from '@inertiajs/inertia-vue3'
+import { Link } from '@inertiajs/vue3'
 import Navigation from '@/Layouts/Tabler/Partials/Navigation.vue'
 import NavAlarm from '@/Layouts/Tabler/Partials/NavAlarm.vue'
 import NavUserMenu from '@/Layouts/Tabler/Partials/NavUserMenu.vue'
