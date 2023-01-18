@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Admin\MembershipController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -66,7 +68,8 @@ Route::middleware('auth')->group(function () {
             Route::delete('memberships/{membership}', [MembershipController::class, 'destroy'])->name('memberships.destroy');
 
             // 사용자 관리
-            Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
+            Route::resource('users', UserController::class);
+            Route::resource('members', MemberController::class);
         });
 });
 

@@ -2,14 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+ * @method static filter($filters)
+ * @method static orderBy(string $string)
+ */
 class Member extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, Notifiable;
 
     protected $table = 'mini_member';
     protected $primaryKey = 'no';
@@ -25,6 +28,11 @@ class Member extends Authenticatable
         'membership_reg_date',
         'membership_until_date',
     ];
+
+    public function scopeFilter($query, $filter)
+    {
+        return $filter->apply($query);
+    }
 
     public function isAdmin(): bool
     {
