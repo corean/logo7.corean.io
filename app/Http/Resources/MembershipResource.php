@@ -19,7 +19,7 @@ class MembershipResource extends JsonResource
             'id'             => $this->id,
             'grade'          => $this->member->membership_grade(),
             'confirm'        => $this->confirm,
-            'chargename'    => $this->chargename,
+            'chargename'     => $this->chargename,
             'mobile'         => $this->mobile,
             'confirmed_at'   => $this->confirmed_at?->format('Y-m-d H:i:s'),
             'created_at'     => $this->created_at?->format('Y-m-d H:i:s'),

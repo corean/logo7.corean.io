@@ -17,7 +17,8 @@ class MembershipController extends Controller
         $memberships = Membership::filter($filters)
             ->with('member')
             ->orderByRaw('ISNULL(confirmed_at) DESC, confirmed_at DESC, created_at DESC')
-            ->paginate(10)->withQueryString();
+            ->paginate(10)
+            ->withQueryString();
 
         return Inertia::render('Admin/Memberships/Index',
             [
