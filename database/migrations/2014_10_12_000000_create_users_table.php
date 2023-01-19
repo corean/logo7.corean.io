@@ -15,13 +15,16 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->integer('member_id')->unsigned()->index()->nullable()->comment('member id');
             $table->string('username')->unique()->comment('사용자 아이디');
             $table->string('name')->comment('사용자 이름');
+            $table->string('real_name')->comment('사용자 실명')->nullable();
             $table->string('email')->comment('사용자 이메일');
             $table->timestamp('email_verified_at')->nullable()->comment('사용자 이메일 인증');
             $table->string('password')->comment('사용자 비밀번호');
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
 
         DB::statement("ALTER TABLE users COMMENT='회원정보'");

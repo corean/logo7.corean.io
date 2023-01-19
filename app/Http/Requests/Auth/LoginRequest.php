@@ -51,7 +51,7 @@ class LoginRequest extends FormRequest
         $credentials = $this->getCredentials();
         // dd($credentials);
 
-        if (!Auth::attempt($credentials, $this->boolean('remember'))) {
+        if (! Auth::attempt($credentials, $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
@@ -81,7 +81,7 @@ class LoginRequest extends FormRequest
         }
 
         return [
-            'id'       => $email,
+            'username' => $email,
             'password' => $this->get('password'),
         ];
     }
@@ -97,7 +97,7 @@ class LoginRequest extends FormRequest
     {
         $factory = $this->container->make(ValidationFactory::class);
 
-        return !$factory->make(
+        return ! $factory->make(
             ['username' => $param],
             ['username' => 'email']
         )->fails();
@@ -113,7 +113,7 @@ class LoginRequest extends FormRequest
      */
     public function ensureIsNotRateLimited()
     {
-        if (!RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
+        if (! RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
             return;
         }
 

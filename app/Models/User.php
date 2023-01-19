@@ -52,8 +52,4 @@ class User extends Authenticatable
         return $filter->apply($query);
     }
 
-    public function setPasswordAttribute($value): string
-    {
-        return $this->attributes['password'] = bcrypt($value);
-    }
 }
