@@ -34,8 +34,8 @@ add('rsync', [
 // Set up a deployer task to copy secrets to the server.
 // Grabs the dotenv file from the github secret
 task('deploy:secrets', function () {
-    file_put_contents(__DIR__ . '/.env', getenv('DOT_ENV'));
-    upload('.env', get('deploy_path') . '/shared');
+    file_put_contents(__DIR__.'/.env', getenv('DOT_ENV'));
+    upload('.env', get('deploy_path').'/shared');
 });
 
 ///////////////////////////////////
@@ -43,7 +43,7 @@ task('deploy:secrets', function () {
 ///////////////////////////////////
 
 host('prod') // Name of the server
-->setHostname('210.220.163.82') // Hostname or IP address
+->setHostname('115.68.171.43') // Hostname or IP address
 ->set('remote_user', 'logo2') // SSH user
 ->set('branch', 'main') // Git branch
 ->set('deploy_path', '/home3/logo2/www'); // Deploy path
