@@ -30,8 +30,17 @@ ls -l
 @task('run_composer')
     echo "Starting deployment ({{ $release }})"
     cd {{ $new_release_dir }}
-    composer install --prefer-dist --no-scripts -q -o
-    composer cache:clear
+    composer install --optimize-autoloader --no-dev
+    php artisan cache:clear
+    php artisan config:cache
+    php artisan route:cache
+    php artisan view:cache
+@endtask
+
+@task('npm_install')
+    cd {{ $app_dir }}/current
+    npm install
+    npm run build
 @endtask
 
 @task('update_symlinks')
@@ -46,8 +55,4 @@ ls -l
     ln -nfs {{ $new_release_dir }} {{ $app_dir }}/current
 @endtask
 
-@task('npm_install')
-    cd {{ $app_dir }}/current
-    npm install
-    npm run build
-@endtask
+
