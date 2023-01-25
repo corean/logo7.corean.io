@@ -14,16 +14,21 @@ Tabler 관련 링크
 - 2023-01-15 laravel sail 적용 (docker-compose) / 이메일 발송 테스트 
 - 2023-01-18 inertia 1.0 업데이트 (Modal 업데이트는 아직도..)
 - 2023-01-19 로그인 방식 변경 (Member > User)
+- 2023-01-25 envoy 배포 & 비밀번호 재설정 기능 추가 
+
 
 ## todo
 - [x] primary color 변경
 - [x] 다크모드
 - [x] toastr 적용
 - [x] 연간회원 페이지 
+- [x] 회원가입 프로세스 확인
+- [x] 비밀번호 찾기 기능 확인
+- [x] toastr 적용
+- [ ] ~~github action 을 이용한 CI/CD 구성~~
+- [x] envoy 배포
 - [ ] breadcrumb 적용
 - [ ] Nav 메뉴 구조화
-- [x] 회원가입 프로세스 확인
-- [ ] 비밀번호 찾기 기능 확인
-- [x] toastr 적용
 - [ ] 테스트 코드 작성
-- [ ] github action 을 이용한 CI/CD 구성
+- [ ] 권한 처리
+- [ ] telescope 설치

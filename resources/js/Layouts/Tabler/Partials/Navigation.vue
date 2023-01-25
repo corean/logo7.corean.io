@@ -130,6 +130,7 @@ import { Link } from '@inertiajs/vue3'
             </li>
 
             <li
+              v-if="$page.props.auth.roles?.includes('최고관리자')"
               class="nav-item dropdown"
               :class="{ active: route().current('admin.*') }"
             >

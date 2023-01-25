@@ -20,7 +20,7 @@ import { Head } from '@inertiajs/vue3'
             </div>
             <div>
               <h4 class="alert-title">
-                {{ __('Welcome') }} {{ $page.props.auth.user.name }}
+                {{ __('Welcome') }} {{ $page.props.auth.user?.name }}
               </h4>
               <div class="text-muted">
                 {{ __('You are logged in!') }}
