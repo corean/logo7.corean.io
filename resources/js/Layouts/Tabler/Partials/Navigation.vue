@@ -43,11 +43,10 @@ import { Link } from '@inertiajs/vue3'
 
             <li class="nav-item" :class="{ active: route().current('test') }">
               <Link class="nav-link" :href="route('test')">
-                <span class="nav-link-icon d-md-none d-lg-inline-block"
-                  ><!-- Download SVG icon from http://tabler-icons.io/i/file-text -->
+                <span class="nav-link-icon d-md-none d-lg-inline-block">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    class="icon icon-tabler icon-tabler-info-circle"
+                    class="icon icon-tabler icon-tabler-border-all"
                     width="24"
                     height="24"
                     viewBox="0 0 24 24"
@@ -58,21 +57,20 @@ import { Link } from '@inertiajs/vue3'
                     stroke-linejoin="round"
                   >
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                    <circle cx="12" cy="12" r="9"></circle>
-                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                    <polyline points="11 12 12 12 12 16 13 16"></polyline>
+                    <path
+                      d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2zm0 6l16 0m-8 -8l0 16"
+                    ></path>
                   </svg>
                 </span>
                 <span class="nav-link-title">
-                  {{ __('test') }}
+                  {{ __('Table') }}
                 </span>
               </Link>
             </li>
 
             <li class="nav-item" :class="{ active: route().current('toast') }">
               <Link class="nav-link" :href="route('toast')">
-                <span class="nav-link-icon d-md-none d-lg-inline-block"
-                  ><!-- Download SVG icon from http://tabler-icons.io/i/file-text -->
+                <span class="nav-link-icon d-md-none d-lg-inline-block">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     class="icon icon-tabler icon-tabler-info-circle"
@@ -92,39 +90,7 @@ import { Link } from '@inertiajs/vue3'
                   </svg>
                 </span>
                 <span class="nav-link-title">
-                  {{ __('toast') }}
-                </span>
-              </Link>
-            </li>
-
-            <li
-              class="nav-item"
-              :class="{ active: route().current('default-layout') }"
-            >
-              <Link class="nav-link" href="/default-layout">
-                <span class="nav-link-icon d-md-none d-lg-inline-block"
-                  ><!-- Download SVG icon from http://tabler-icons.io/i/file-text -->
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="icon icon-tabler icon-tabler-layout-2"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    stroke-width="2"
-                    stroke="currentColor"
-                    fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                    <rect x="4" y="4" width="6" height="5" rx="2"></rect>
-                    <rect x="4" y="13" width="6" height="7" rx="2"></rect>
-                    <rect x="14" y="4" width="6" height="7" rx="2"></rect>
-                    <rect x="14" y="15" width="6" height="5" rx="2"></rect>
-                  </svg>
-                </span>
-                <span class="nav-link-title">
-                  {{ __('default-layout') }}
+                  {{ __('Toast') }}
                 </span>
               </Link>
             </li>
