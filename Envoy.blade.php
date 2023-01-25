@@ -38,7 +38,8 @@ ls -l
 @endtask
 
 @task('npm_install')
-    cd {{ $app_dir }}/current
+    echo "npm install ({{ $release }})"
+    cd {{ $new_release_dir }}
     npm install
     npm run build
 @endtask
