@@ -4,6 +4,12 @@ use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogUdpHandler;
 
+// console 실행 여부 판단해서 채널 분리
+$log_channel =  env('LOG_CHANNEL', 'stack');
+if (app()->runningInConsole()) {
+    $log_channel = 'cli';
+}
+
 return [
 
     /*
