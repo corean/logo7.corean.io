@@ -15,6 +15,7 @@ ls -l
 @story('deploy')
     clone_repository
     run_composer
+    npm_install
     update_symlinks
 @endstory
 
@@ -30,6 +31,7 @@ ls -l
     echo "Starting deployment ({{ $release }})"
     cd {{ $new_release_dir }}
     composer install --prefer-dist --no-scripts -q -o
+    composer cache:clear
 @endtask
 
 @task('update_symlinks')
@@ -44,3 +46,8 @@ ls -l
     ln -nfs {{ $new_release_dir }} {{ $app_dir }}/current
 @endtask
 
+@task('npm_install')
+    cd {{ $app_dir }}/current
+    npm install
+    npm run build
+@endtask
