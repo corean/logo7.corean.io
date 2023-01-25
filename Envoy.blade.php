@@ -6,8 +6,8 @@ ls -l
 
 @setup
     $repository = 'git@github.com:corean/logo7.corean.io.git';
-    $releases_dir = '/home/logo2/releases';
-    $app_dir = '/home/logo2/www';
+    $releases_dir = '/home3/logo2/releases';
+    $app_dir = '/home3/logo2/';
     $release = date('YmdHis');
     $new_release_dir = $releases_dir .'/'. $release;
 @endsetup
