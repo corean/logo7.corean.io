@@ -17,6 +17,7 @@ ls -l
     run_composer
     npm_install
     update_symlinks
+    optimize
 @endstory
 
 @task('clone_repository')
@@ -31,10 +32,6 @@ ls -l
     echo "Starting deployment ({{ $release }})"
     cd {{ $new_release_dir }}
     composer install --optimize-autoloader --no-dev
-    php artisan cache:clear
-    php artisan config:cache
-    php artisan route:cache
-    php artisan view:cache
 @endtask
 
 @task('npm_install')
@@ -54,6 +51,15 @@ ls -l
 
     echo 'Linking current release'
     ln -nfs {{ $new_release_dir }} {{ $app_dir }}/current
+@endtask
+
+@task('optimize')
+    echo "optimize laravel"
+    cd {{ $new_release_dir }}
+    php artisan cache:clear
+    php artisan config:cache
+    php artisan route:cache
+    php artisan view:cache
 @endtask
 
 
