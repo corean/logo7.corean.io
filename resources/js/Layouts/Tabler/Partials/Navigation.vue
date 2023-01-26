@@ -31,7 +31,7 @@ import { Link } from '@inertiajs/vue3'
                   </svg>
                 </span>
                 <span class="nav-link-title">
-                  {{ __('Dashboard') }}
+                  {{ __('Home') }}
                 </span>
               </Link>
             </li>
