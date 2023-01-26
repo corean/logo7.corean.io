@@ -15,7 +15,7 @@ Tabler 관련 링크
 - 2023-01-18 inertia 1.0 업데이트 (Modal 업데이트는 아직도..)
 - 2023-01-19 로그인 방식 변경 (Member > User)
 - 2023-01-25 envoy 배포 & 비밀번호 재설정 기능 추가 
-- 2023-01-26 breadcrumb 적용 
+- 2023-01-26 breadcrumb 적용 & telescope 설치
 
 
 ## todo
@@ -29,7 +29,7 @@ Tabler 관련 링크
 - [ ] ~~github action 을 이용한 CI/CD 구성~~
 - [x] envoy 배포
 - [x] breadcrumb 적용
-- [ ] telescope 설치
+- [x] telescope 설치
 - [ ] Nav 메뉴 구조화
 - [ ] 테스트 코드 작성
 - [ ] 권한 처리
