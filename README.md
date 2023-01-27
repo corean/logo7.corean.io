@@ -30,6 +30,9 @@ Tabler 관련 링크
 - [x] envoy 배포
 - [x] breadcrumb 적용
 - [x] telescope 설치
+- [x] 권한 처리
+- [x] 메일 발송 테스트 (SPF)
+- [x] 서버이름 변경 : corean.biz > corean.io (logo@corean.biz 발송시 /var/spool/mail로 빠짐)
 - [ ] Nav 메뉴 구조화
 - [ ] 테스트 코드 작성
-- [ ] 권한 처리
+- [ ] 비밀번호 찾기후 변경시 Member 모델도 적용

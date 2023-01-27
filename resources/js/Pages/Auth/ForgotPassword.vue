@@ -29,10 +29,6 @@ const submit = () => {
       링크를 이메일로 보내드립니다.
     </div>
 
-    <div v-if="status" class="_mb-4 _text-sm _font-medium _text-green-600">
-      {{ status }}
-    </div>
-
     <form @submit.prevent="submit">
       <div>
         <InputLabel for="email" value="E-mail" />
@@ -48,6 +44,10 @@ const submit = () => {
         />
 
         <InputError class="_mt-2" :message="form.errors.email" />
+
+        <div v-if="status" class="_mb-4 _text-sm _font-medium _text-green-600">
+          {{ status }}
+        </div>
       </div>
 
       <div class="_mt-4 _flex _items-center _justify-end">

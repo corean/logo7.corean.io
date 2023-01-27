@@ -53,4 +53,17 @@ class User extends Authenticatable
         return $filter->apply($query);
     }
 
+    public function member()
+    {
+        return $this->hasOne(Member::class, 'no', 'member_id');
+    }
+
+    public function setPasswordAttribute($value)
+    {
+        // users 테이블의 password 필드에 변경시 mini_member 테이블도 같이 적용
+        $this->member->password = $value;
+        $this->member->save();
+        
+        return $this->attributes['password'] = $value;
+    }
 }
