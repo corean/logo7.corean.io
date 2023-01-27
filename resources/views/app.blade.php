@@ -18,10 +18,13 @@
 
     <!-- Scripts -->
     @routes
+    <!-- vite -->
     @vite(['resources/js/app.js', "resources/js/Pages/{$page['component']}.vue"])
+    <!-- inertiaHead -->
     @inertiaHead
 </head>
 <body class="font-sans antialiased theme-{{ request()->get('theme') ?? 'light' }}">
+<!-- inertia -->
 @inertia
 </body>
 </html>
