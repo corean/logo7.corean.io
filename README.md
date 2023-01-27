@@ -36,3 +36,9 @@ Tabler 관련 링크
 - [ ] Nav 메뉴 구조화
 - [ ] 테스트 코드 작성
 - [ ] 비밀번호 찾기후 변경시 Member 모델도 적용
+
+
+deploy
+```bash
+php vendor/bin/envoy run deploy
+```
