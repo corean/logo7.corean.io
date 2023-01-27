@@ -42,3 +42,4 @@ deploy
 ```bash
 php vendor/bin/envoy run deploy
 ```
+- nginx > symbolick 링크 관련 오류 : https://github.com/zendtech/ZendOptimizerPlus/issues/126
