@@ -58,8 +58,6 @@ class User extends Authenticatable
         return $this->hasOne(Member::class, 'no', 'member_id');
     }
 
-    /*
-    실서버에서 mutator가 안되서 직접 변경하였음 app/Http/Controllers/Auth/NewPasswordController.php
     public function setPasswordAttribute($value)
     {
         // users 테이블의 password 필드에 변경시 mini_member 테이블도 같이 적용
@@ -68,5 +66,4 @@ class User extends Authenticatable
 
         return $this->attributes['password'] = $value;
     }
-    */
 }
