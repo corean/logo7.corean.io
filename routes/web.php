@@ -3,6 +3,8 @@
 use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Admin\MembershipController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\FileController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -53,6 +55,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('posts/{segment2?}/{segment3?}', [PostController::class, 'index'])->name('posts.index'); // 게시판 목록
+    Route::get('posts/{segment2}/{segment3}/{segment4}', [PostController::class, 'show'])->name('posts.show'); // 게시물 보기
+    Route::get('files/preview/{file}', [FileController::class, 'preview'])->name('files.preview');
+    Route::get('files/download/{file}', [FileController::class, 'download'])->name('files.download');
 
     Route::middleware('super-admin')
         ->prefix('admin')
