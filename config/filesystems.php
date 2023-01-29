@@ -32,7 +32,8 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root' => storage_path('app'),
+            // 'root' => storage_path('app'),
+            'root' => env('LOGO_FILE_DIRECTORY'),
             'throw' => false,
         ],
 

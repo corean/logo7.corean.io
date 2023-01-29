@@ -16,9 +16,10 @@ Tabler 관련 링크
 - 2023-01-19 로그인 방식 변경 (Member > User)
 - 2023-01-25 envoy 배포 & 비밀번호 재설정 기능 추가 
 - 2023-01-26 breadcrumb 적용 & telescope 설치
+- 2023-01-27 비밀번호 찾기시 Member 모델도 적용
 
 
-## todo
+## To-Do
 - [x] primary color 변경
 - [x] 다크모드
 - [x] toastr 적용
@@ -32,10 +33,10 @@ Tabler 관련 링크
 - [x] telescope 설치
 - [x] 권한 처리
 - [x] 메일 발송 테스트 (SPF)
-- [x] 서버이름 변경 : corean.biz > corean.io (logo@corean.biz 발송시 /var/spool/mail로 빠짐)
+- [x] 서버 이름 변경 : corean.biz > corean.io (logo@corean.biz 발송시 /var/spool/mail로 빠짐)
+- [x] 비밀번호 찾기후 변경시 Member 모델도 적용
 - [ ] Nav 메뉴 구조화
 - [ ] 테스트 코드 작성
-- [ ] 비밀번호 찾기후 변경시 Member 모델도 적용
 
 
 deploy
