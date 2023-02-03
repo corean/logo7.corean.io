@@ -20,24 +20,40 @@ $assets-base: "../../../dist" !default;
         left: 0;
         right: 0;
         bottom: -0.25rem;
-        border: 0 var(--tblr-border-style) rgba(97,104,118,0.1);
+        border: 0 var(--tblr-border-style) rgba(97, 104, 118, 0.1);
         border-bottom-width: 3px;
     }
 }
+
 // 다크모드 일때 로고 전체 톤을 다운시킨다
 .theme-dark .navbar-brand-autodark {
     filter: brightness(.7) invert(0);
 }
+
 .table thead th, .markdown > table thead th {
     font-size: .75rem;
 }
+
 // button, [type='button'], [type='reset'], [type='submit'] 초기화가 안되서 추가
 .btn-close {
     background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000000'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e") center/0.75rem auto no-repeat !important;
 }
+
 .btn .icon {
     --tblr-btn-padding-x: .25rem;
 }
+
 .sticky-top {
     z-index: 30;
+}
+
+.btn-ghost-cancel {
+    color: #616876;
+    border-color: transparent;
+}
+
+.btn-ghost-cancel:hover {
+    background-color: #e5e5e5;
+    border-color: #e5e5e5;
+    color: #616876;
 }

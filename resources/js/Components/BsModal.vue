@@ -101,7 +101,7 @@ const close = () => {
             <div class="modal-footer">
               <a
                 href="#"
-                class="btn btn-link link-secondary"
+                class="btn btn-ghost-cancel"
                 @click="close"
                 data-bs-dismiss="modal"
               >

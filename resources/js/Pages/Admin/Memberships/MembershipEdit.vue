@@ -127,8 +127,14 @@ const closeModal = () => {
         <div class="offset-sm-1 col-2">연간회원이력</div>
         <div class="col">
           <ul v-if="membership.data.completedCount" cl>
-            <li v-for="(item, key) in membership.data.completedList" :key="key">
-              {{ moment(item.created_at).format('YYYY-MM-DD') }}
+            <li
+              v-for="(item, key) in membership.data.completedList"
+              :key="key"
+              class="d-flex"
+            >
+              <span style="width: 6rem">
+                {{ moment(item.created_at).format('YYYY-MM-DD') }}
+              </span>
               {{ item.chargename }}
               {{ item.mobile }}
             </li>
