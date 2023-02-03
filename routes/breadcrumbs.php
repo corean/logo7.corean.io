@@ -2,6 +2,7 @@
 
 // Note: Laravel will automatically resolve `Breadcrumbs::` without
 // this import. This is nice for IDE syntax and refactoring.
+use App\Models\Membership;
 use Diglactic\Breadcrumbs\Breadcrumbs;
 use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
 
@@ -11,7 +12,7 @@ use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
 Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
     $trail->push(__('Home'), route('home'));
 });
-Breadcrumbs::for('admin.memberships.index', function (BreadcrumbTrail $trail) {
+Breadcrumbs::for('admin.memberships.index', function (BreadcrumbTrail $trail, Membership $membership = null) {
     $trail->parent('home');
     $trail->push('연간회원', route('admin.memberships.index'));
 });
